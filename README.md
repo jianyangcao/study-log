@@ -4,7 +4,7 @@ Hi! I'm Jianyang, MSCS student at UCI (Fall 2025).
 This repo contains my daily study notes and projects in **Cybersecurity, Cloud, and Computer Science**.  
 
 ## 📂 Structure
-- `notes/` → Daily study notes (TryHackMe, Cybrary, Security+)
+- `notes/` → Daily study notes (TryHackMe, Cybrary，Hack the Box)
 - `leetcode/` → Problem solutions & explanations
 - `projects/` → Small labs & writeups
 
