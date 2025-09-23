@@ -1,149 +1,217 @@
-1.1 Threat Acotrs
-Threat Actors:
-  Nation state--Advanced Persistent Threats(APTs)
-  Unskilled attacker(script kiddies)
-  Hacktivist
-  Insider threat
-  Organized crime
-  Shadow IT
-Attributes of Threat Actors: internal vs external,  resource/funding,  motivation,  capability
-Motivation:exfiltration, espionage, service disruption, blackmial/extortion, hacktivism
+# 1.1 Threat Actors
 
+**Threat Actors**  
+- Nation state -- Advanced Persistent Threats (APTs)  
+- Unskilled attacker (script kiddies)  
+- Hacktivist  
+- Insider threat  
+- Organized crime  
+- Shadow IT  
 
-1.2 Threat Vectors
-Threat Vector: A means of creating a compromise and accessing a system
-  direct access
-  backdoor software
-  email
-  images
-  unsecure networks-wired, wireless
-  supply chains(managed service providers, vendors, suppliers)
-  social engineering
+**Attributes of Threat Actors**  
+- Internal vs external  
+- Resource / funding  
+- Motivation  
+- Capability  
 
+**Motivation**  
+- Exfiltration  
+- Espionage  
+- Service disruption  
+- Blackmail / extortion  
+- Hacktivism  
 
-1.3 Social Engineering (part 1)
-What is social engineering: impersonation in order to gian access or information
-  non-techincal means of gaining access to resources without being subjected to normal means of authentication
-  socail engineers often use impersonation of an authorized party to gain trust or access
-  according to Webroot Inc., social engineering is responsible for approximately 93% of data breaches at financial institutions
-Socail Enginneering Attacks
-  Phisihing: an attempt by unauthorized entities posing as legitimate individuals, usually via email, to obtain sensitive information from an indiscriminate group of individuals."if you case a large enough net, you're going to catch some fish".
-    sperar phsihing:phishing targeted to a specific group, organization, or demographic
-      whaling: a type of spear phishing geared towward the senior leaders of a organization
-    vishing/Smishing:VOIP or SMS phishing
-  Spam: unrequested bulk messages sent in large quantities
-  SPIM: spam of instant messaging
-  Bluejacking: spam over bluetooth
-  Prepending: adding information to a message to legitimize a message. For instance, adding "Re:" in the subject line makes it look like the message is a reply
-  Pretexting: An attacker presents a fabrication of a legitimate reasonthey would need access to a system or resource even thought they've nor been granted access
-  Identity Fraud: Using information(often obtained through social engineering attacks) to present oneself as another. Loans and even mortgages are often fraudulently obtained through this means
-  Invoice Scams: sending invoices purporting to be from legitimate companies in hipes that they will  be paid without further investigation
-  Hoaxes: chiain letters, promises of financial gain are types of hoaxes. Other hoaxes may suggest a user delete files or perform an action for what seems like legitimate reason.
-  Credential harvesting: specifically designed ot steal account and authentication credentials
-  Reconnaissance Attack: using publicly available sources to collect infromation
-  Impersonatio: presenting oneself as another
-  Watering hole attack: inject malware through an insecure, frequently used third party. For instance, if users of an organization frequest a less secure site, an attacker may be able to introduce malware through the less secure site
-  Typosquatting: registering a domain name similar to a legitimate site in hopes that users will mistype the correct location and wind up on a spoofed site
-  Dumpster diving: Retrieving informationform a user or organization;s trash or recycling or some other discarded material
-  Shoulder surfing: looking over an authoriized user's shoulder hoping to see sensitive information like passwords or PINs
-  Tailgating: following an authorized user into a secure area without having to provide credentials
-  Piggybacking: similar to tailgating, except the authorized user wiilingly allows the arracker to access the area
+---
 
-1.4 Social Engineering(Part 2)
-Influence Campaigns
-  Large scale program, often launched by a hostile nation
-  Greared towards swayign public opinion
-  Often used in an attmept to sway election results
-    hybrid warfare includes both traditional and socail means to accomplish the same military goals
-    socail media is frequently exploited vy bots and used to spread misinformation
-Principle(Reasons for Effecitveness)
-  Principle used: Authority, Intimidation, Consensus, Scarcity, Familiarity, Trust, Urgency
+# 1.2 Threat Vectors
 
+**Threat Vector**: A means of creating a compromise and accessing a system  
 
-1.5 Indicators of Atttacks
-Malware Threat Vectors
-  Threat Vectors: describes how the malicious code is replicated and spread
-  Viruses: usually require a host file and unser interaction(filess viruses do not need a host)
-  Worms: a memory resident type of malware that can self-propagate and does not need a host file
-  Trojams: present themselves as a desirable application or tool, yt contain malware
-  PUPs/PUAs(Potentially Unwanted Programs/Applications): software that is installed in addition to the app the user has chosen. sometimes callled grayware, as it is not necessarily malicious
-  Other classifications are determined by the payload. For instance, a RAT(Remote Access Trojan) can be delivered by a trojan.
+- Direct access  
+- Backdoor software  
+- Email  
+- Images  
+- Unsecure networks - wired, wireless  
+- Supply chains (managed service providers, vendors, suppliers)  
+- Social engineering  
 
-Unauthorized Access
-  Backdoor: network software that opens a port on the compromised system. the host is then "listening" for traffic on the port and allows access to the system, bypassing normal authentication methods
-  RATs: a type of  backdoor software that allows covert administrative access to a system
-  Bot: an untomated script or tool that performs malicious activity
-  Botnet: a collection of systems controlled by the same threat actor
-  Command and Control(C2 or C&C): host or network that communicates with the exploited hosts
-  Rootkit: operates at executive level or can be used to escalate privileges
+---
 
-Ransomware:
-  Ransomware: computer-based attack that allows an attacker to extort money from the victim. May display threatening messages in relation to illegal activities supposedly performed on the compromised system
-  Cryptomalware: encrypts critical systems or files and requires the user to pay a fee or ransom in excahnge for the key, which will unlock the encrypted files
-  Logic and Time Bombs(not all malware runs immediately
-  Time bombs wait until a specific date or time to unleash the payload of  the attack
-  Logic Bombs wait until a logical envent, such as the tenth time a file is accessed, before delivering the payload
+# 1.3 Social Engineering (Part 1)
 
-Spyware
-  Spyware: malware used to track the activities of users
-  Tracking cookies: plain text files stored on the user's system that can record pages visited, purchases made, shopping cart contents, search queries, etc., often used in conjunction with adware
-  Adware: often reconfigures browers to target market to an individual based on previous activities. May reconfigure browser to load an adfilled home page
-  Keylogger: records keystrokes
+**What is social engineering**  
+- Impersonation in order to gain access or information  
+- Non-technical means of gaining access to resources without being subjected to normal means of authentication  
+- Social engineers often use impersonation of an authorized party to gain trust or access  
+- According to Webroot Inc., social engineering is responsible for approximately 93% of data breaches at financial institutions  
 
-Attacks on Passwords:
-  Dictionary: every word in a file
-  Brute Force: every combinationof characters
-  Hybrid: every word in file plus some frequently used character combinations
-  Rainbow table: stored results from a brute force attack matched against the password hash. MUCH faster than running the brute force attack itself.
-  Plaintext/unencrypted databases or protocols
-  Spraying: attempting a common password like "Password1" to numerous accounts
+**Social Engineering Attacks**  
+- **Phishing**: an attempt by unauthorized entities posing as legitimate individuals, usually via email, to obtain sensitive information from an indiscriminate group of individuals. *“If you cast a large enough net, you're going to catch some fish.”*  
+  - **Spear phishing**: phishing targeted to a specific group, organization, or demographic  
+    - **Whaling**: a type of spear phishing geared toward the senior leaders of an organization  
+  - **Vishing / Smishing**: VOIP or SMS phishing  
+- **Spam**: unrequested bulk messages sent in large quantities  
+- **SPIM**: spam of instant messaging  
+- **Bluejacking**: spam over Bluetooth  
+- **Prepending**: adding information to a message to legitimize it (e.g., “Re:” in the subject line)  
+- **Pretexting**: attacker fabricates a legitimate reason they would need access to a system/resource  
+- **Identity Fraud**: using stolen information to present oneself as another (e.g., loans, mortgages)  
+- **Invoice Scams**: sending fake invoices hoping they get paid without investigation  
+- **Hoaxes**: chain letters, fake promises of financial gain, or fake instructions (e.g., delete files)  
+- **Credential harvesting**: designed to steal account and authentication credentials  
+- **Reconnaissance Attack**: using public sources to collect information  
+- **Impersonation**: presenting oneself as another  
+- **Watering hole attack**: inject malware through a less secure third-party site frequently visited by target org  
+- **Typosquatting**: registering a domain similar to a legit site, hoping users mistype  
+- **Dumpster diving**: retrieving info from trash or discarded material  
+- **Shoulder surfing**: looking over someone’s shoulder to see sensitive info (e.g., PINs, passwords)  
+- **Tailgating**: following authorized user into secure area without credentials  
+- **Piggybacking**: similar to tailgating, but authorized user knowingly allows entry  
 
-Physcial Security Threats
-  Malicious USB cable: can act as a skimmer over legitimate charging stations at public locations such as airports
-  Flash Drives: can provide the means to distribute malware, as well as to remove sensitive infromation
-  Card Cloning: making multiple copies of an existing card
-  Skimming: installing a counterfeit card reader over a legitimate divice
+---
 
-Adversarial AI
-  AI can be used to analyze activities of users and systems
-  Tainted Training Data For ML: AI systems "learn" based on data retrived from customer systems and security devices like honeypots. By injecting spurious code or traffic into training environment, an attacker can corrupt the learning process, therefore rendering the AI software skewed
-  ML Algorithms: ML algorithms can be targeted, just as others
+# 1.4 Social Engineering (Part 2)
 
-3rd Party Attacks
-  Supply Chain: compromising elements of a system provided by another party. For instance, if the processor is compromised at the vendor, then the system will never be secure. Could also exploit 3rd party access to a system or environment
-  Cloud-based attacks: attacks at the CSP(cloud service provider)itself or protocols/apps/accounts used to access and transmit data to and from CSP
-  Poorly written APIs(application programming interfaces)
+**Influence Campaigns**  
+- Large-scale program, often launched by a hostile nation  
+- Geared towards swaying public opinion  
+- Often used to sway election results  
+- Hybrid warfare includes both traditional and social means to achieve military goals  
+- Social media frequently exploited by bots to spread misinformation  
 
-On-Premises vs Cloud-Based Attacks
-  Most risks are similar, but it is the location/responsibility for risk management that varies
-    Facility Security
-    Hardware/Software Vulnerabilities
-    Malicious Insiders
-    Weak Configurations
-    3rd party issues
+**Principles (Reasons for Effectiveness)**  
+- Authority  
+- Intimidation  
+- Consensus  
+- Scarcity  
+- Familiarity  
+- Trust  
+- Urgency  
 
-Cryptographic attacks
-  Collision Attacks: attempting to create a cryptographic collision to identify another series of characters that will produce the same hash as the legitimate passwaord
-  Birthday Attacks: attempts to cause a collision based on the fact that it is mathematically infeasible to cause a collisions with a specific hash, nad that is more likely to find two hashes that just happen to match, Again, mathematically infeasible but more probable
-  Downgrade Attacks: requests access to the server at a lower level of security than the default in hopes that passwords would be transmitted in a less secure manner
+---
 
-Pass the Hash
-  Password Hashes are storeed in protected memory on our systems
-  if these hashes are accessed by an attacker(who would need administrative rights to do so), then the arracker may be able to exploit the SSO authentication to use the hashes elsewhere to sutehnticate
-  there may be numerous hashes stored in memory, for instance, the currrent user, remote users, service accounts
-  users should not have debug previleges or be administrators on their local machines
+# 1.5 Indicators of Attacks
 
+**Malware Threat Vectors**  
+- Viruses: require host file + user interaction (fileless viruses don’t need host)  
+- Worms: memory resident, self-propagating, no host file  
+- Trojans: appear as desirable apps but contain malware  
+- PUPs/PUAs: “grayware,” installed alongside chosen apps  
+- RAT (Remote Access Trojan): delivered by Trojan, gives covert admin access  
 
-1.6 Indicators for application attacks
-Code Injection: an attack where an attacker supplies malicious input into a program, and the program mistakenly executes it as code.(SQL,DLL,LDAP,XML)
-  Input validationn and sanitization can be used to mitigate risk of code injection. Fuzzing tests application for weak input control
+**Unauthorized Access**  
+- Backdoor: opens port, bypasses normal authentication  
+- RATs: covert admin access  
+- Bot: automated malicious tool  
+- Botnet: collection of compromised systems under attacker control  
+- Command and Control (C2): attacker’s server that communicates with exploited hosts  
+- Rootkit: escalates privileges, hides processes  
 
-1.7 Cross-Site Attacks
-Cross-Site Scripting:Persistent
+**Ransomware**  
+- Ransomware: extorts money, may display threatening messages  
+- Cryptomalware: encrypts files, ransom for decryption key  
+- Logic Bombs: triggered by logical event  
+- Time Bombs: triggered by date/time  
 
-  
-  
+**Spyware**  
+- Spyware: tracks user activity  
+- Tracking cookies: record browsing activity, shopping, etc.  
+- Adware: reconfigures browsers, loads ad-filled homepage  
+- Keylogger: records keystrokes  
 
-  
+**Attacks on Passwords**  
+- Dictionary: tries every word in file  
+- Brute Force: tries every character combination  
+- Hybrid: dictionary + common character combos  
+- Rainbow Table: precomputed brute force hashes (faster than brute force)  
+- Plaintext: unencrypted DBs or protocols  
+- Spraying: try common passwords (e.g., Password1) across many accounts  
 
-    
+**Physical Security Threats**  
+- Malicious USB cable: acts as skimmer at public charging stations  
+- Flash Drives: malware delivery + data theft  
+- Card Cloning: duplicate existing card  
+- Skimming: counterfeit reader over legit one  
+
+**Adversarial AI**  
+- Tainted Training Data: poisoning AI training data  
+- ML Algorithms: targeted just like other systems  
+
+**3rd Party Attacks**  
+- Supply Chain: compromised vendor elements (hardware/software)  
+- Cloud-based: attack CSP or its protocols/accounts  
+- Poorly written APIs  
+
+**On-Premises vs Cloud-Based Attacks**  
+- Risks are similar, but responsibility differs  
+  - Facility security  
+  - Hardware/software vulnerabilities  
+  - Malicious insiders  
+  - Weak configurations  
+  - 3rd party issues  
+
+**Cryptographic Attacks**  
+- Collision Attacks: attempt to create same hash  
+- Birthday Attacks: exploit probability to find collisions  
+- Downgrade Attacks: force weaker security level  
+
+**Pass the Hash**  
+- Password hashes in protected memory can be reused  
+- Attacker uses SSO authentication with stolen hashes  
+- Hashes may include current users, remote users, service accounts  
+- Mitigation: limit admin/debug privileges  
+
+---
+
+# 1.6 Indicators for Application Attacks
+
+**Code Injection**  
+- Attack: attacker supplies malicious input, executed as code (SQL, DLL, LDAP, XML)  
+- Mitigation: input validation and sanitization  
+- Fuzzing: tests app for weak input control  
+
+---
+
+# 1.7 Cross-Site Attacks
+
+**Cross-Site Scripting (Persistent)**  
+1. Adversary finds site vulnerable to script injection  
+2. Injects malicious script to steal cookies  
+3. User activates script when accessing site  
+4. Session cookie sent to adversary  
+
+**Cross-Site Scripting (Reflected / Non-Persistent)**  
+1. Adversary sends malicious URL to user  
+2. User clicks link → site includes malicious string in response  
+3. Browser executes malicious script  
+4. User’s sensitive info sent to adversary  
+
+**Cross-Site Request Forgery (XSRF)**  
+1. Adversary forges request (e.g., fund transfer)  
+2. Embeds request in link → sends to logged-in user  
+3. User clicks link, unintentionally sends request  
+4. Site validates and transfers funds  
+
+📌 **Key difference**:  
+- XSS: exploits user’s trust in site  
+- XSRF: exploits site’s trust in user  
+
+---
+
+# 1.8 Timing Attacks
+
+- **Physical Access**: gain entry before security verified  
+- **Race Conditions**: exploit timing/order of processes  
+- **TOC/TOU (Time of Check / Time of Use)**: mismatch between check vs execution  
+- **Replay Attacks**: capture + reuse traffic (password/session)  
+- **Error Handling**: system should fail securely, avoid excessive error info  
+
+---
+
+# 1.9 Memory Issues
+
+- **Integer Overflow**: values out of expected range  
+- **Memory Leak**: app doesn’t release memory properly  
+- **Buffer Overflow**: more entries than buffer can handle  
+
+---
