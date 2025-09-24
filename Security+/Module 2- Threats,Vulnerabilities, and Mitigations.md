@@ -213,4 +213,169 @@ XSRF takes advantage of a website's trust in a user.
 ## 2.9 Memory Issues
 - Integer Overflow: Values out of expected range  
 - Memory Leak: Application does not release its memory as expected  
-- Buffer Overflow: More entries than expected  
+- Buffer Overflow: More entries than expected
+
+## 2.10 Network-based Attacks
+
+---
+
+### Network-based attacks
+- **Port scans**  
+- **XMas Scans** → sends a packet with all flags set in a combination normal conversation never uses – can be used to determine operating system and open ports  
+- **Man-in-the-middle** → attacker inserts himself into a communication path  
+  - Passive → sniffing  
+  - Active → session hijack  
+- **Fuzzing** → attempting to inject code in vulnerable applications; also used in software penetration testing  
+- **Banner grabbing** → some network services return information in response to a service request  
+
+---
+
+### Spoofing
+- IP spoofing  
+- MAC spoofing / cloning  
+- Email spoofing  
+- Caller ID spoofing  
+- Smurf attacks  
+- Fraggle attacks  
+
+---
+
+### Redirection
+- **ARP (Address Resolution Protocol)**  
+  - Poisoning  
+- **DNS**  
+  - Rogue infrastructure  
+  - Poisoning  
+  - Pharming  
+  - Hosts file  
+- **URL redirection**  
+
+---
+
+### Wi-Fi
+- Wardriving / Warchalking  
+- Encryption  
+- Sniffing  
+  - WEP  
+  - WPA  
+  - WPA II  
+- WPS attacks  
+- Rogue Access Points / Evil Twins  
+- Disassociation / Deauthentication  
+- Jamming  
+
+---
+
+### Bluetooth
+- Bluejacking  
+- Bluesnarfing  
+- Bluebugging  
+
+## 2.11 Indicators of Attacks
+
+- Account Lockouts  
+- Concurrent Sessions  
+- Blocked Content  
+- Impossible Travel  
+- Resource Consumption  
+- Out-of-cycle Logging  
+- Missing Logs  
+
+---
+
+## 2.12 Mitigation Techniques
+
+- **Segmentation**  
+  - Isolation of "trusted" resources from "untrusted" entities  
+  - Network Segmentation  
+  - APIs (Application Programming Interfaces)  
+  - Firewalls  
+  - "Zero Trust"  
+
+- **Access Control Lists**  
+  - Firewalls  
+  - Permissions  
+  - Principle of Least Privilege (POLP)  
+
+---
+
+## 2.13 Security Assessments
+
+### Vulnerability Management Activities
+- **Vulnerability Scanner** → scans devices on your network to see what areas might be vulnerable.  
+  - May test known exploits, missing patches, misconfigured settings, and defaults.  
+  - Examples: Nikto, Nessus  
+
+**Critical components of a Vulnerability Scanner**  
+- **Credentials**  
+  - Uncredentialed Scan → no trusted access  
+  - Credentialed Scan → requires login, deeper access  
+- **Agent / Agentless** → runs with or without local agents  
+- **Intrusive / Non-intrusive**  
+  - Non-intrusive → identifies and reports vulnerability  
+  - Intrusive → attempts to exploit found vulnerability  
+
+- **Patch Management**  
+  - Identifies missing updates/patches (OS, firewalls, switches firmware)  
+  - Installs updates to keep systems secure  
+
+- **Risk Assessment** → helps find areas not previously considered vulnerable  
+
+### Vulnerability Information Sources
+- **Advisories** → specific data on identified vulnerability  
+- **Bulletins** → summaries/newsletters of advisories  
+- **Information Sharing and Analysis Centers (ISACs)** → nonprofit sector-specific groups  
+- **News Reports** → articles or headlines  
+
+### Security Content Automation Protocol (SCAP)
+- A suite of interoperable specs to standardize naming/formatting of vulnerabilities.  
+- Open standards to enumerate flaws and configuration issues.  
+
+**SCAP Languages**  
+- **OVAL (Open Vulnerability and Assessment Language)** → collects and assesses system info, machine state, reporting  
+- **ARF (Asset Reporting Format)** → correlates reporting formats to device info  
+- **XCCDF (Extensible Configuration Checklist Description Format)** → XML format for benchmarks/checks  
+
+**SCAP Identification Schemes**  
+- **CPE (Common Platform Enumeration)** → standardized naming of systems/software  
+- **CVE (Common Vulnerabilities and Exposures)** → list of known vulnerabilities (format: CVE-YEAR-XXXX)  
+- **CCE (Common Configuration Enumeration)** → focuses on configuration issues  
+
+### Honeypots
+- **Deployment**  
+  - Pseudo flaws → loopholes purposely added to trap intruders  
+  - Sacrificial lamb system → enticing target with open ports and services  
+  - Goal → attackers target honeypot instead of production systems  
+
+- **Enticement vs. Entrapment** → honeypots must be careful not to cross legal/ethical boundaries  
+
+### Log Reviews
+- Examine system log files for events or control effectiveness  
+- **Standardize time** → use NTPv4 (RFC 5905) across devices  
+- Logs often stored locally → harder to correlate events  
+- Limited size → risk of overwrite or stop logging  
+- **Syslog** → standard protocol to send text logs to central server  
+
+### Security Information and Event Managers (SIEMs)
+- Centralize, correlate, retain event data → generate alerts  
+- Provide dashboard highlighting incidents  
+- Analysts investigate and act  
+- Useful for forecasting and trend analysis  
+
+### Unified Threat Management (UTM) Systems
+- All-in-one solution:  
+  - Firewall  
+  - Proxy  
+  - NAT/PAT  
+  - Web Filtering  
+  - Wi-Fi Security  
+
+---
+
+## 2.14 Monitoring Sources
+
+- SIEM devices  
+- IDS / IPS  
+- File Integrity Monitoring (FIM)  
+- Data Leak / Loss Prevention (DLP)  
+- Antivirus (AV)  
