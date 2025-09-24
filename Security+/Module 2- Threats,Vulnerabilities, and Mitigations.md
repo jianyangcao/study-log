@@ -302,68 +302,66 @@ XSRF takes advantage of a website's trust in a user.
 ## 2.13 Security Assessments
 
 ### Vulnerability Management Activities
-- **Vulnerability Scanner** → scans devices on your network to see what areas might be vulnerable.  
-  - May test known exploits, missing patches, misconfigured settings, and defaults.  
-  - Examples: Nikto, Nessus  
+- **Vulnerability Scanner** → Scan devices on your network to see what areas might be vulnerable.  
+  - They may test known exploits against your systems, look for missing patches, misconfigured system settings, and default settings that need to be changed.  
+  - Example: Nikto, Nessus  
 
 **Critical components of a Vulnerability Scanner**  
-- **Credentials**  
-  - Uncredentialed Scan → no trusted access  
-  - Credentialed Scan → requires login, deeper access  
-- **Agent / Agentless** → runs with or without local agents  
-- **Intrusive / Non-intrusive**  
-  - Non-intrusive → identifies and reports vulnerability  
-  - Intrusive → attempts to exploit found vulnerability  
+- **Credentials**: can scan with or without user credentials  
+  - Uncredentialed Scan: non-credentialed scans, do not get trusted access to the systems they are scanning  
+  - Credentialed Scan: require logging in and provide access to resources an untrusted user would not have  
+- **Agent / Agentless**: can be run without an agent or be configured to run with agents installed on the local devices  
+- **Intrusive / Non-intrusive**: non-intrusive scans identify a vulnerability and report on it. Intrusive scans attempt to exploit a vulnerability when it is found  
 
-- **Patch Management**  
-  - Identifies missing updates/patches (OS, firewalls, switches firmware)  
-  - Installs updates to keep systems secure  
+- **Patch management** is a way to manage software vulnerabilities  
+  - Identify missing updates or patches for the devices on your network (not just for operating system, devices such as firewalls and switches have firmware updates)  
+  - Install missing patches to keep systems fully up-to-date and secure  
 
-- **Risk Assessment** → helps find areas not previously considered vulnerable  
+- Performing a risk assessment will help you to find areas that perhaps you didn't consider as being vulnerable  
 
 ### Vulnerability Information Sources
-- **Advisories** → specific data on identified vulnerability  
-- **Bulletins** → summaries/newsletters of advisories  
-- **Information Sharing and Analysis Centers (ISACs)** → nonprofit sector-specific groups  
-- **News Reports** → articles or headlines  
+- **Advisories**: specific data on an identified vulnerability  
+- **Bulletins**: summaries/newsletter listings of advisories  
+- **Information Sharing and Analysis Centers (ISACs)**: non-profit groups that specialize in a specific sector  
+- **News Reports**: news articles or headlines  
 
 ### Security Content Automation Protocol (SCAP)
-- A suite of interoperable specs to standardize naming/formatting of vulnerabilities.  
-- Open standards to enumerate flaws and configuration issues.  
+- A suite of interoperable specs designed to standardize the naming conventions and formatting used to identify and report on software flaws.  
+- Made up of open standards to enumerate software flaws and security related configuration issues  
 
 **SCAP Languages**  
-- **OVAL (Open Vulnerability and Assessment Language)** → collects and assesses system info, machine state, reporting  
-- **ARF (Asset Reporting Format)** → correlates reporting formats to device info  
-- **XCCDF (Extensible Configuration Checklist Description Format)** → XML format for benchmarks/checks  
+- Open Vulnerability and Assessment Language (OVAL): provides a consistent way to collect and assess three main aspects of evaluated systems: system information, machine state, reporting  
+- Asset Reporting Format (ARF): correlates reporting formats to device information  
+- Extensible Configuration Checklist Description Format (XCCDF): written in XML to provide a consistent way to define benchmarks and checks performed during assessments  
 
 **SCAP Identification Schemes**  
-- **CPE (Common Platform Enumeration)** → standardized naming of systems/software  
-- **CVE (Common Vulnerabilities and Exposures)** → list of known vulnerabilities (format: CVE-YEAR-XXXX)  
-- **CCE (Common Configuration Enumeration)** → focuses on configuration issues  
+- Common Platform Enumeration (CPE): standardized naming format to identify systems and software  
+- Common Vulnerabilities and Exposures (CVE): lists of known vulnerabilities. Format is CVE-YEAR-XXXX  
+- Common Configuration Enumeration (CCE): similar to CVE but focuses on configuration issues that may lead to a vulnerability  
 
 ### Honeypots
 - **Deployment**  
-  - Pseudo flaws → loopholes purposely added to trap intruders  
-  - Sacrificial lamb system → enticing target with open ports and services  
-  - Goal → attackers target honeypot instead of production systems  
+  - Pseudo Flaws: loophole purposely added to operating system or application to trap intruders  
+  - Sacrificial lamb system on the network  
+  - Administrators hope that intruders will attack this system instead of their production systems  
+  - It is enticing because many ports are open and services are running  
 
-- **Enticement vs. Entrapment** → honeypots must be careful not to cross legal/ethical boundaries  
+- Be careful of Enticement vs. Entrapment  
 
 ### Log Reviews
-- Examine system log files for events or control effectiveness  
-- **Standardize time** → use NTPv4 (RFC 5905) across devices  
-- Logs often stored locally → harder to correlate events  
-- Limited size → risk of overwrite or stop logging  
-- **Syslog** → standard protocol to send text logs to central server  
+- Examination of system log files to detect security events or to verify the effectiveness of security controls  
+- Ensure that time is standardized across all networked devices. The Network Time Protocol (NTP) version 4, described in RFC 5905, is the industry standard for synchronizing computer clocks between networked devices  
+- By default, most log files are stored locally on the corresponding device. The challenge with this approach is that it makes it more difficult to correlate events across devices to a given incident  
+- Also consider that log file size is limited and events will possibly be overwritten or system will stop logging entries after that limit is reached  
+- Syslog: a standard network-based logging protocol that works on a wide variety of different types of devices and applications, allowing them to send text-formatted log messages to a central server  
 
 ### Security Information and Event Managers (SIEMs)
-- Centralize, correlate, retain event data → generate alerts  
-- Provide dashboard highlighting incidents  
-- Analysts investigate and act  
-- Useful for forecasting and trend analysis  
+- Systems that enable the centralization, correlation, and retention of event data in order to generate automated alerts  
+- A SIEM provides a dashboard interface that highlights possible security incidents. It is then up to the security specialists to investigate each alert and determine if further action is required  
+- Also useful for forecasting and trend analysis  
 
-### Unified Threat Management (UTM) Systems
-- All-in-one solution:  
+### Unified Threat Management Systems
+- All-in-one  
   - Firewall  
   - Proxy  
   - NAT/PAT  
