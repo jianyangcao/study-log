@@ -132,39 +132,67 @@ Example: `kill -9 3594`
 - Run process in background: `command &`  
 - Suspend process: `Ctrl + Z`  
 - Resume in foreground: `fg`  
-- Resume in background: `bg`  
+- Resume in background: `bg`
+
+
+# Crontab & Automation Notes
+
+## 📌 What is Crontab?
+- A **crontab** is a special file with formatting recognized by the `cron` process.  
+- It executes each line step by step according to the defined schedule.  
+- Each crontab entry requires **6 fields**:
 
 ---
 
-# 📊 Cheat Sheet (Quick Reference)
-
-| Category | Command | Example |
-|----------|---------|---------|
-| List files | `ls -lh` | Show files with readable sizes |
-| Change dir | `cd <dir>` | `cd /etc` |
-| Show path | `pwd` | `/home/user` |
-| Show file | `cat <file>` | `cat notes.txt` |
-| Create file | `touch <file>` | `touch test.txt` |
-| Create folder | `mkdir <dir>` | `mkdir logs` |
-| Copy | `cp src dst` | `cp a.txt b.txt` |
-| Move/Rename | `mv src dst` | `mv old.txt new.txt` |
-| Remove | `rm <file>` | `rm data.log` |
-| Find file | `find -name "*.txt"` | Find all `.txt` |
-| Search text | `grep "root" /etc/passwd` | Search "root" |
-| Count lines | `wc -l <file>` | Count lines in file |
-| SSH login | `ssh user@ip` | `ssh ubuntu@192.168.1.30` |
-| File transfer | `scp file user@ip:/path` | `scp a.txt ubuntu@ip:/tmp/` |
-| Serve file | `python3 -m http.server 8080` | Serve files on port 8080 |
-| Processes | `ps aux` | Show running processes |
-| Kill process | `kill -9 <PID>` | Force kill process |
-| Systemctl | `systemctl start nginx` | Start nginx service |
-| Background | `command &` | Run in background |
-| Foreground | `fg` | Bring back process |
+## 📂 Field Descriptions
+- **MIN** → What minute to execute at (0–59)  
+- **HOUR** → What hour to execute at (0–23)  
+- **DOM** → What day of the month to execute at (1–31)  
+- **MON** → What month of the year to execute at (1–12)  
+- **DOW** → What day of the week to execute at (0–6, Sunday=0)  
+- **CMD** → The actual command that will be executed  
 
 ---
 
-# ✅ Tips
-- Always check `pwd` before using `rm -R`.  
-- Use `ls -lh` for readable sizes.  
-- Use `ps aux | grep <name>` to find processes quickly.  
-- When transferring files, confirm IP and paths.  
+## 📝 Example
+- Backup "Documents" directory every 12 hours:  
+
+`0 */12 * * * cp -R /home/cmnnatic/Documents /var/backups/`  
+
+Meaning:  
+- `0` → Run on the 0th minute  
+- `*/12` → Every 12 hours  
+- `* * *` → Every day, month, and weekday  
+- Command: `cp -R /home/cmnnatic/Documents /var/backups/`
+
+---
+
+## ⚙️ Managing Crontab
+- Edit crontab: `crontab -e`  
+- List crontab: `crontab -l`  
+- Remove crontab: `crontab -r`  
+
+Default editor is usually **Nano**, but can be changed.  
+
+---
+
+## ⏱️ Special Strings in Crontab
+Instead of numeric values, you can use these shortcuts:  
+
+- `@reboot` → Run once at startup  
+- `@hourly` → Run once every hour  
+- `@daily` → Run once a day (midnight)  
+- `@weekly` → Run once a week (Sunday 00:00)  
+- `@monthly` → Run once a month (1st day, 00:00)  
+- `@yearly` or `@annually` → Run once a year (Jan 1, 00:00)  
+
+---
+
+# ✅ Quick Tips
+- Use `crontab -l` to confirm your tasks are scheduled.  
+- Always use full paths in commands (e.g., `/usr/bin/python3`).  
+- Redirect output to a log file for debugging:  
+  - Example: `* * * * * /script.sh >> /var/log/cron.log 2>&1`  
+
+
+
