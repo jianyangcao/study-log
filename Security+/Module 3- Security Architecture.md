@@ -277,3 +277,212 @@ Infrastructure hosted in the organization’s own data center, fully owned and m
 
 ### ✅ Summary  
 On-Premises = full control and ownership of infrastructure. Organizations must handle **management, security, and scalability** themselves. Concepts like **centralization, isolation, virtualization, and physical air-gapping** play a major role in designing secure on-prem deployments.  
+
+## 3.4 Architecture Considerations
+
+- **Availability** – Ensure the system is accessible when needed.  
+- **Resilience** – Ability to withstand failures and continue operating.  
+- **Cost** – Financial considerations for design and operation.  
+- **Responsiveness** – How quickly the system reacts to requests.  
+- **Scalability** – Ability to grow and handle increased demand.  
+- **Ease of deployment** – How easily new systems/services can be deployed.  
+- **Risk transference** – Shifting risks to third parties (e.g., insurance, cloud).  
+- **Ease of recovery** – Speed and simplicity of restoring operations after disruption.  
+- **Patch availability** – Vendor-provided updates and fixes.  
+- **Ability to patch** – How easily patches can be applied to the system.  
+- **Power** – Energy requirements and availability.  
+- **Compute** – Processing capacity to meet workload demands.
+
+## 3.5 IDS and IPS
+
+### Intrusion Detection System (IDS)
+- **Types**:
+  - **HIDS (Host-based IDS)** – Monitors activity on individual systems.
+  - **NIDS (Network-based IDS)** – Monitors network traffic across the network.  
+- **Function**:
+  - Monitors for signs of an attack.
+  - Only reports if it finds anything (no prevention).
+- **Analysis Techniques**:
+  - **Signature-based** – Detects patterns of known attacks.
+  - **Anomaly-based** – Detects deviations from normal behavior.
+  - **Behavior-based** – Monitors actions/behaviors that resemble attacks.
+
+---
+
+### Intrusion Prevention System (IPS)
+- **Types**:
+  - **NIPS (Network Intrusion Prevention System)** – Positioned in-line to inspect and block network traffic.
+  - **Wireless IPS** – Can block unknown/unauthorized wireless devices.
+- **Function**:
+  - A step beyond IDS — reacts to events it detects.
+  - Can reset connections or block malicious traffic.
+  - Must be placed **in-line** to actively prevent threats.
+
+## 3.6 Firewalls
+
+### Security Zones
+A fundamental requirement in network security is to **isolate trusted resources from untrusted entities**.  
+Networks are segmented into zones based on trust:
+
+- **LAN (Trusted)** – Internal network, highest trust.
+- **DMZ (Screened Subnet / Semi-Trusted)**  
+  - Buffer zone between an unprotected network (internet) and a protected network.  
+  - Internet-accessible servers (bastion hosts) are placed in the DMZ.  
+- **Internet (Untrusted)** – Lowest trust, public access.
+
+---
+
+### Firewall Basics
+- A firewall uses **rule-based access control** to evaluate traffic and allow or deny based on predefined criteria.  
+- **Types**:
+  - **Web Application Firewalls (WAF)** – Protect web apps from SQL injection, XSS, etc.  
+  - **Forward Proxy** – Inspects traffic going from the internal network out to the internet.  
+  - **Reverse Proxy** – Inspects traffic coming from the external network into the internal network.  
+
+---
+
+### Configuring Firewall Rules
+
+**Task**: Configure four rules on the firewall.
+
+1. **Allow Accounting → Admin Server 1 via HTTPS**  
+   - Source: `10.18.255.10/24` (Accounting subnet)  
+   - Destination: `10.18.255.101` (Admin Server 1)  
+   - Port: `443 TCP` (HTTPS)  
+   - Action: **Allow**
+
+2. **Allow HR → Server 2 via SCP (SSH)**  
+   - Source: `10.18.255.10/23` (HR subnet)  
+   - Destination: `10.18.255.2` (Server 2)  
+   - Port: `22 TCP` (SCP uses SSH)  
+   - Action: **Allow**
+
+3. **Allow IT → Admin Server 1**  
+   - Source: `10.18.255.10/25` (IT subnet)  
+   - Destination: `10.18.255.101` (Admin Server 1)  
+   - Port: *Any*  
+   - Action: **Allow**
+
+4. **Allow IT → Admin Server 2**  
+   - Source: `10.18.255.10/25` (IT subnet)  
+   - Destination: `10.18.255.102` (Admin Server 2)  
+   - Port: *Any*  
+   - Action: **Allow**
+
+---
+
+### Example Firewall Rule Table
+
+| Source IP/Subnet   | Destination IP   | Port Number | Protocol | Action |
+|--------------------|------------------|-------------|----------|--------|
+| 10.18.255.10/24    | 10.18.255.101    | 443         | TCP      | Allow  |
+| 10.18.255.10/23    | 10.18.255.2      | 22          | TCP      | Allow  |
+| 10.18.255.10/25    | 10.18.255.101    | Any         | TCP/UDP  | Allow  |
+| 10.18.255.10/25    | 10.18.255.102    | Any         | TCP/UDP  | Allow  |
+
+## 3.7 Zero Trust
+
+- **Definition**: A newer trend in network security that assumes **no inherent trust** — every entity must authenticate before access is allowed.  
+- **Principle**: *“Never trust, always verify.”*  
+- **Why it’s necessary**:
+  - Rogue processes and malware can impersonate trusted users or systems.
+  - Insider threats or compromised devices can bypass perimeter defenses.
+- **Implementation strategies**:
+  - Require authentication and authorization for every request (users, devices, applications).  
+  - Enforce least privilege access.  
+  - Break down the network into smaller, easier-to-manage **segments (planes)**.  
+  - Use continuous monitoring and identity validation.  
+
+## 3.8 Jump Server
+
+- **Definition**: A special-purpose server used as a **gateway** to access and manage devices in a separate security zone (e.g., internal servers in a data center).  
+- **Purpose**:
+  - Adds an **extra layer of security** by forcing admins to authenticate on the jump server before reaching sensitive systems.  
+  - Helps isolate **administrative access** from regular user access.  
+- **Use Cases**:
+  - Remote administrators connecting to internal servers from outside the network.  
+  - Segregating access to critical servers (databases, financial systems) behind a controlled point.  
+- **Security Benefits**:
+  - Centralizes access control and monitoring of administrative activities.  
+  - Reduces attack surface — only the jump server is exposed to external access, not every internal server.  
+  - Supports logging and auditing of admin commands.  
+- **Example**:
+  - Admin connects via SSH/RDP → Jump Server → Internal Servers.  
+
+## 3.9 Additional Security Devices
+
+- **Honeypots**  
+  - Decoy systems designed to attract attackers.  
+  - Used to detect, deflect, or study intrusion attempts.  
+
+- **Security Information and Event Managers (SIEMs)**  
+  - Collect, aggregate, and analyze security event logs.  
+  - Provide real-time monitoring, alerts, and correlation of events.  
+  - Examples: Splunk, IBM QRadar, ArcSight.  
+
+- **Unified Threat Management (UTM) Systems**  
+  - All-in-one security appliances combining firewall, IDS/IPS, antivirus, VPN, and more.  
+  - Simplifies management but may create a single point of failure.  
+
+- **Network Load Balancers and Traffic Shapers**  
+  - **Load Balancing**: Distributes workload across multiple servers to ensure availability and performance.  
+  - **Traffic Shaping**: Controls the flow of network traffic by prioritizing certain types of packets.  
+    - Example: MPLS networks use labels to indicate priority for Quality of Service (QoS).  
+  - Both are designed to **improve performance** and **optimize resource usage**.  
+
+## 3.10 VPNs
+
+### Tunneling
+- A function of VPNs: encapsulates one protocol within another, creating a **virtual network**.
+- Provides **encapsulation** and can also provide security services such as **encryption** and **authentication**.
+- Allows routing of non-routable protocols and private IP addresses.
+- Common tunneling protocols:
+  - PPTP (Point-to-Point Tunneling Protocol)
+  - L2TP (Layer 2 Tunneling Protocol)
+  - IPSec
+  - GRE (Generic Routing Encapsulation)
+  - SSL/TLS
+
+---
+
+### IPSec (Internet Protocol Security)
+- **Framework** that provides:
+  - Encryption
+  - Authentication
+  - Integrity
+- Works at the **network layer** of the OSI model.
+
+#### Modes
+- **Tunnel Mode**: Entire IP packet is encapsulated (used in site-to-site VPNs).  
+- **Transport Mode**: Only the payload is encapsulated (used in end-to-end VPNs).  
+
+
+---
+
+### IPSec Sub-protocols
+- **Authentication Header (AH)**  
+  - Provides **integrity, authenticity, and non-repudiation** (Integrity Check Value).  
+  - Protects the entire packet (header, data, trailer) except dynamic fields (e.g., TTL).  
+  - ⚠️ **No confidentiality (no encryption).**
+
+- **Encapsulating Security Payload (ESP)**  
+  - Provides **encryption**, authenticity, and integrity (via MAC).  
+  - Protects the payload only.  
+  - Ensures confidentiality + authenticity.
+
+- **Internet Key Exchange (IKE)**  
+  - Manages secure connections and key exchange (⚠️ no direct security services itself).  
+  - Based on Diffie-Hellman for key agreement.  
+  - Uses ISAKMP to manage:
+    - Security Associations (SAs)  
+    - Keys  
+    - Security Parameters Index (SPI)  
+
+---
+
+### Key Points
+- IPSec provides **encapsulation**, but encryption depends on the protocol (AH = no encryption, ESP = encryption).  
+- What is encapsulated can be protected using AH/ESP inside IPSec.  
+- VPNs rely heavily on IPSec for secure tunneling across untrusted networks like the Internet.  
+
+3.11 Protecitng Data
