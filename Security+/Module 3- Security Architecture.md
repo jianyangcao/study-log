@@ -454,7 +454,9 @@ Networks are segmented into zones based on trust:
 
 #### Modes
 - **Tunnel Mode**: Entire IP packet is encapsulated (used in site-to-site VPNs).  
-- **Transport Mode**: Only the payload is encapsulated (used in end-to-end VPNs).  
+- **Transport Mode**: Only the payload is encapsulated (used in end-to-end VPNs).
+![IPSec Tunnel vs Transport](images/ipsec-tunnel-vs-transport.jpg)
+
 
 
 ---
