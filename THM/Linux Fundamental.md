@@ -195,4 +195,53 @@ Instead of numeric values, you can use these shortcuts:
   - Example: `* * * * * /script.sh >> /var/log/cron.log 2>&1`  
 
 
+# Linux System & Package Management Notes
+
+---
+
+## 📦 Package Management with APT
+- The `apt` command is part of the **package management system** on Ubuntu/Debian.  
+- It allows you to **install, update, and remove** software.  
+- `apt` manages both the **packages** and the **sources (repositories)** from which the packages are retrieved.  
+- It provides a whole suite of tools for managing software at the same time.  
+
+---
+
+## 📂 Managing Repositories (Adding and Removing)
+
+- Normally we use the `apt` command to install software.  
+- Repositories are sources that contain the packages.  
+- Adding repositories allows us to install software that is **not part of the default Ubuntu repositories**.  
+- Repositories can be added manually or with helper commands like `add-apt-repository`.  
+- Packages can also be installed with tools like `dpkg`, but `apt` is preferred because it automatically checks for **updates**.  
+
+### 🔐 GPG Keys
+- Software integrity is guaranteed by **GPG (GNU Privacy Guard) keys**.  
+- GPG keys act as digital signatures from developers.  
+- If the GPG key does not match what your system trusts, the software will not be downloaded or installed.  
+
+---
+
+## 📝 Example: Adding Sublime Text Repository
+
+1. Let's download the GPG key and use apt-key to trust it:  `wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -`
+
+2. Now that we have added this key to our trusted list, we can now add Sublime Text 3's repository to our apt sources list. A good practice is to have a separate file for every different community/3rd party repository that we add.
+
+2.1. Let's create a file named sublime-text.list in /etc/apt/sources.list.d and enter the repository information like so:
+
+
+
+2.2. And now use Nano or a text editor of your choice to add & save the Sublime Text 3 repository into this newly created file:
+
+
+
+2.3. After we have added this entry, we need to update apt to recognise this new entry -- this is done using the apt update command
+
+2.4. Once successfully updated, we can now proceed to install the software that we have trusted and added to apt using apt install sublime-text
+
+Removing packages is as easy as reversing. This process is done by using the add-apt-repository --remove ppa:PPA_Name/ppa command or by manually deleting the file that we previously added to. Once removed, we can just use apt remove [software-name-here] i.e. apt remove sublime-text
+
+Maintaing Your System:logs
+
 
