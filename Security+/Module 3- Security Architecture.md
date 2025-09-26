@@ -229,3 +229,51 @@ Network architecture that separates the **control plane** from the **data plane*
 
 **Examples:** Cisco ACI, VMware NSX, OpenDaylight, Google B4 WAN  
 
+## On-Premises Architectures  
+
+### 🏢 On-Premises (本地部署)  
+Infrastructure hosted in the organization’s own data center, fully owned and managed by the organization (hardware, servers, storage, networking, security).  
+
+---
+
+### 🔑 Key Concepts  
+
+#### 1. Centralization vs Decentralization  
+- **Centralization**:  
+  - Resources and infrastructure are consolidated in a single data center.  
+  - Easier to manage and secure, but creates a single point of failure.  
+- **Decentralization**:  
+  - Resources are distributed across multiple sites.  
+  - Increases redundancy and resilience but adds management complexity.  
+
+---
+
+#### 2. Logical Isolation  
+- Separation of resources within the same physical infrastructure.  
+- Achieved via **VLANs, firewalls, access controls, or hypervisor-level separation**.  
+- Prevents one system from directly accessing another without proper authorization.  
+
+---
+
+#### 3. Virtualization vs Containerization  
+- **Virtualization**: Runs multiple **VMs** on a single physical machine, each with its own OS.  
+  - Example: VMware, Hyper-V, KVM.  
+  - Good for isolation but heavier (requires more resources).  
+- **Containerization**: Runs multiple **containers** on the same OS kernel.  
+  - Example: Docker, Kubernetes.  
+  - Lightweight, faster startup, easier scaling, but shares OS kernel (less isolation than VMs).  
+
+---
+
+#### 4. Physical Security  
+- Protecting infrastructure with **restricted access, surveillance, biometrics, and guards**.  
+- Physical measures ensure servers are not tampered with.  
+
+**Air Gaps**:  
+- A security practice where a system/network is **physically isolated** from unsecured networks (like the internet).  
+- Often used in **military, nuclear, and high-security environments**.  
+
+---
+
+### ✅ Summary  
+On-Premises = full control and ownership of infrastructure. Organizations must handle **management, security, and scalability** themselves. Concepts like **centralization, isolation, virtualization, and physical air-gapping** play a major role in designing secure on-prem deployments.  
