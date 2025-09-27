@@ -821,7 +821,8 @@ It ensures data can be restored if:
   - **RTO/MTD (Recovery Time Objective / Maximum Tolerable Downtime)** → How long systems can be down.  
   - **MTBF (Mean Time Between Failure)** → Reliability.  
   - **MTTR (Mean Time to Repair)** → Recovery speed.  
-  - **MOR (Minimum Operating Requirements)** → Bare minimum resources needed to function.  
+  - **MOR (Minimum Operating Requirements)** → Bare minimum resources needed to function.
+![BIA](images/BIA.jpg)
 
 👉 **Relevance vs. Criticality**:  
 - Some processes (like auditing) are important, but **not critical**.  
