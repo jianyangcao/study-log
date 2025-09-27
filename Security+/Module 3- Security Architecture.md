@@ -487,4 +487,369 @@ Networks are segmented into zones based on trust:
 - What is encapsulated can be protected using AH/ESP inside IPSec.  
 - VPNs rely heavily on IPSec for secure tunneling across untrusted networks like the Internet.  
 
-3.11 Protecitng Data
+## 3.11 Protecting Data
+
+### Data Types
+- Regulated  
+- Trade secret  
+- Intellectual property  
+- Legal information  
+- Financial information  
+- Human-readable and non-human-readable data  
+
+---
+
+### Data Classification
+- Development of **sensitivity labels** for data and assigning them to configure baseline security.  
+- **Criteria**: based on the value of the data.  
+- **Controls**: determine baseline security configuration for each classification.  
+- **Roles**:  
+  - **Data owner**: determines classification of data.  
+  - **Data custodian (看守人)**: maintains the data.  
+
+---
+
+### Considerations for Determining an Asset's Value
+- Value to the organization  
+- Loss if compromised  
+- Legislative drivers  
+- Liabilities  
+- Value to competitors  
+- Acquisition costs  
+
+---
+
+### Data Lifecycle
+- **Create → Store → Use → Share → Archive → Destroy**  
+
+---
+
+### Government and Military Data Classifications
+- Top secret → Secret → Confidential → Sensitive but unclassified (SBU) → Unclassified  
+
+---
+
+### Private Sector Data Classifications
+- Confidential → Private → Sensitive → Public  
+
+---
+
+### Data Roles
+- **Data owner**: Senior executive role; ultimate responsibility for maintaining the CIA (Confidentiality, Integrity, Availability).  
+- **Data custodian / steward**: Manages the system hosting the data; enforces access control, encryption, and backup/recovery.  
+- **Data protection officer (DPO)**: Oversees compliance with data protection laws/regulations.  
+- **Data controller**: Determines how and why personal data is processed.  
+- **Data processor**: Processes data on behalf of the controller.  
+
+---
+
+### Data Sovereignty
+- Laws vary across jurisdictions.  
+- **Data sovereignty**: Refers to legal rights and protections applied to data because of the country in which it is stored.  
+- Implications:  
+  - Data protection requirements depend on physical storage location.  
+  - **Data localization**: Requirement to keep data within a certain country.  
+  - **Data residency**: Where the data is physically stored, but not necessarily bound by localization laws.  
+
+## 3.12 States of Data
+
+### 1. Data at Rest
+- Data stored on a device or storage medium.  
+- Protection methods:
+  - File system encryption  
+  - EFS (Encrypting File System)  
+  - Full drive encryption (BitLocker, FileVault)  
+  - TPM (Trusted Platform Module) for hardware-based security  
+
+---
+
+### 2. Data in Process
+- Data actively being **used or processed** by applications, memory, or CPU.  
+- Typically resides in system memory (RAM).  
+- Harder to secure, but mitigations include:
+  - Application-layer security controls  
+  - Runtime protections  
+  - Secure enclaves (e.g., Intel SGX, ARM TrustZone)  
+
+---
+
+### 3. Data in Transit
+- Data moving across networks.  
+- Protection methods:
+  - SSL/TLS (secure web traffic)  
+  - IPSec (VPN tunnels)  
+  - SSH (secure remote access)  
+
+## 3.13 Secure Data Disposal
+
+### Data Retention / Archival Policy
+- Must be driven by **business requirements** and **legal/regulatory requirements**.  
+- Legal requirements vary by industry.  
+- Business requirements may **exceed legal requirements**, mandating longer retention.  
+- Must also comply with **law enforcement directives**.  
+- At the end of the data lifecycle, it should be **securely destroyed**.  
+- Information should be **labeled and protected** based on classification.  
+- Media type and format should always be considered.  
+
+---
+
+### Sanitizing Media: The process of removing or destroying data from storage media so that it cannot be reconstructed.
+Factors to consider when sanitizing media:  
+- **Media type & size**  
+  - e.g., optical (non-rewritable), magnetic, SSD, etc.  
+  - e.g., MB, GB, TB scale.  
+- **Confidentiality level** of data stored on the media.  
+- **Processing location**: in a controlled area or not.  
+- **Sanitization process**: internal vs outsourced.  
+- **Volume**: how much media needs to be sanitized by type.  
+- **Availability of equipment & tools** for sanitization.
+
+### Methods of Media Sanitization
+
+1. **Clearing**
+   - **Definition**: Overwriting storage space with non-sensitive data (e.g., random bits or zeros).  
+   - **Goal**: Prevents recovery using **normal system utilities or common recovery tools**.  
+   - **Methods**:
+     - File-level overwrite
+     - Disk wipe utilities (e.g., DBAN, built-in OS secure erase)
+   - **Use case**: When the device will remain in a **trusted environment** and be reused internally.  
+
+---
+
+2. **Purging**
+   - **Definition**: More thorough than clearing; protects against **advanced recovery techniques** (e.g., forensic analysis).  
+   - **Goal**: Makes it infeasible to recover data even with sophisticated lab methods.  
+   - **Methods**:
+     - **Degaussing**: Demagnetizes magnetic storage (e.g., hard drives, tapes).  
+     - **Cryptographic erase**: Destroys encryption keys, making encrypted data unreadable.  
+   - **Use case**: When media is leaving the organization’s control but not being destroyed (e.g., returning leased hardware).  
+
+---
+
+3. **Destroying**
+   - **Definition**: Physically rendering the media **unusable** and data **irretrievable**.  
+   - **Goal**: Permanent, guaranteed disposal of sensitive data.  
+   - **Methods**:
+     - **Shredding**: Mechanically cutting media into small pieces.  
+     - **Incineration**: Burning the media until destroyed.  
+     - **Drilling / Crushing**: Breaking platters, chips, or circuits.  
+     - **Chemical destruction**: Using acid or other solvents.  
+   - **Use case**: When data is **highly sensitive** (e.g., classified military data, health records) or equipment will not be reused.  
+
+---
+
+### 🔑 Quick Comparison
+
+| Method       | Protection Level | Typical Techniques         | Best For |
+|--------------|------------------|----------------------------|----------|
+| **Clearing** | Basic            | Overwriting, wiping tools  | Internal reuse of media |
+| **Purging**  | Strong           | Degaussing, crypto-erase   | When media leaves org but reused |
+| **Destroying** | Maximum        | Shredding, incineration, crushing | Final disposal of highly sensitive data |
+
+## 3.14 Resiliency
+
+### Redundant Spares
+- **Redundant hardware**: available in case the primary device fails.  
+- Often associated with **hard drives**.  
+- Hot, warm, and cold **swappable devices**.  
+- SLAs (Service Level Agreements).  
+- **MTBF** (Mean Time Between Failure) & **MTTR** (Mean Time to Repair).  
+
+---
+
+## RAID (Redundant Array of Independent Disks)
+
+RAID is a storage technology that combines multiple physical drives into a single logical unit to improve **performance**, **redundancy**, or both.
+
+---
+
+### Common RAID Levels
+
+- **RAID 0 (Striping)**
+  - Data split across multiple drives.
+  - ✅ High performance (fast read/write).
+  - ❌ No redundancy → if one drive fails, all data is lost.
+  - Use case: Non-critical systems needing speed (e.g., gaming).
+
+- **RAID 1 (Mirroring)**
+  - Data is duplicated on two drives.
+  - ✅ High redundancy (if one fails, the other works).
+  - ❌ Storage efficiency = 50%.
+  - Use case: Critical data storage (e.g., financial records).
+
+- **RAID 5 (Striping with Parity)**
+  - Data + parity distributed across 3+ drives.
+  - ✅ Can survive **1 drive failure**.
+  - ✅ Good balance of performance + redundancy.
+  - ❌ Rebuild after failure is slow.
+  - Use case: Business servers, general-purpose storage.
+
+- **RAID 6 (Striping with Double Parity)**
+  - Similar to RAID 5, but uses **two parities**.
+  - ✅ Can survive **2 drive failures**.
+  - ❌ Slightly slower write performance.
+  - Use case: Large storage arrays with high reliability needs.
+
+- **RAID 10 (1+0, Mirroring + Striping)**
+  - Combines RAID 1 and RAID 0.
+  - ✅ High performance + high redundancy.
+  - ❌ Requires at least 4 drives (expensive).
+  - Use case: Databases, high-performance applications.
+
+---
+
+### Quick Comparison
+
+| RAID Level | Drives Needed | Performance | Redundancy | Fault Tolerance | Efficiency |
+|------------|---------------|-------------|-------------|-----------------|------------|
+| **RAID 0** | 2+            | High        | None        | 0 drives        | 100%       |
+| **RAID 1** | 2             | Medium      | High        | 1 drive         | 50%        |
+| **RAID 5** | 3+            | High        | Medium      | 1 drive         | ~67–80%    |
+| **RAID 6** | 4+            | Medium      | High        | 2 drives        | ~50–67%    |
+| **RAID 10**| 4+            | High        | High        | 1 per mirror    | 50%        |
+
+---
+
+### Key Points
+- RAID improves **resiliency** but is **not a substitute for backups**.  
+- Choose RAID level based on balance between **speed, storage efficiency, and fault tolerance**.  
+
+---
+
+### Redundancy for Servers & Services
+- **Mirroring**: Primary server mirrors data to secondary server.  
+  - If primary fails → automatic rollover to secondary.  
+  - Provides **server fault tolerance**.  
+- **Clustering**: Group of servers managed as a single system.  
+  - Higher availability, scalability, and easier management.  
+  - Can provide:
+    - **Active/Active**: Load balancing between servers.  
+    - **Active/Passive**: One server active, the other on standby.  
+  - Appears as a single system to users (**server farm**).  
+
+---
+
+### Redundant Power
+- **Uninterruptible Power Supply (UPS)** considerations:
+  - Size of UPS load supported.  
+  - Battery duration (how long it can sustain power).  
+  - Transfer speed to handle the load when primary power fails.  
+  - Physical space requirements.  
+
+- **Desirable UPS features**:
+  - Long battery life.  
+  - Remote diagnostic software.  
+  - Surge protection & line conditioning.  
+  - EMI/RFI filters (reduce errors caused by electrical noise).  
+  - High MTBF values.  
+  - Automatic shutdown support for systems.
+ 
+## Redundancy for Data 
+
+### Backups
+Backing up software and hardware is a critical part of network availability.  
+It ensures data can be restored if:
+- A hard drive fails  
+- A disaster occurs  
+- Software corruption happens  
+
+#### Types of Backups
+- **Full Backup**
+  - Backs up all selected files.  
+  - Archive bit is reset (bit set to 0).  
+
+- **Incremental Backup**
+  - Backs up only files modified since the last backup.  
+  - Archive bit is reset (bit set to 0).  
+  - ✅ Saves time and space, ❌ slower restore (needs full + all incrementals).  
+
+- **Differential Backup**
+  - Backs up all files modified since the last full backup.  
+  - Archive bit is **not** reset (bit set to 1).  
+  - ✅ Faster restore (needs full + last differential), ❌ larger backup size.  
+
+- **Copy Backup**
+  - Same as full backup, but archive bit is **not** reset.  
+  - Often used before upgrades or system maintenance.  
+
+---
+
+### Backup Issues
+- Identify **what needs to be backed up** first (critical systems, databases, configs).  
+- **Media rotation schemes**:  
+  - **Grandfather-Father-Son** – oldest, middle, and newest backups in rotation.  
+  - **Tower of Hanoi** – mathematical rotation for extended retention.  
+- Develop a **backup schedule** (daily, weekly, monthly).  
+- If restoring after a compromise, ensure the backup **does not contain the same vulnerabilities**.  
+
+---
+
+### Redundancy for Staff
+- **Eliminate single point of failure** (knowledge and responsibilities).  
+- **Cross-training**: multiple employees know the same critical tasks.  
+- **Job rotation**: reduces insider threats, spreads knowledge.  
+- **Training and education**: ensures staff can properly handle incidents and recovery.
+
+## 3.15 Business Continuity & Disaster Recovery Planning (BCP & DRP)
+
+### Business Continuity Plan (BCP)
+- **Goal**: Sustain operations and protect business viability during/after a disaster until normal conditions return.  
+- **Focus**: Long-term, organizational survival (umbrella term).  
+- Includes DRP, error handling, exception handling, long-term planning.  
+
+### Disaster Recovery Plan (DRP)
+- **Goal**: Minimize the effects of a disaster and restore IT systems quickly.  
+- **Focus**: Short-term, IT-focused recovery (servers, networks, data).  
+
+---
+
+### Steps in a BCP
+1. Obtain senior management support (**BCP policy**).  
+2. Secure funding & allocate resources.  
+3. Appoint **BCP coordinator/project manager**.  
+4. Develop & approve **project charter** (scope, objectives, authority).  
+5. Form **BCP team**.  
+
+---
+
+### Business Impact Analysis (BIA)
+- Conducted by **BCP committee**.  
+- Identifies/prioritizes critical business processes.  
+- Evaluates **impact of loss** on the organization.  
+- Defines key metrics:  
+  - **RPO (Recovery Point Objective)** → How much data loss is acceptable.  
+  - **RTO/MTD (Recovery Time Objective / Maximum Tolerable Downtime)** → How long systems can be down.  
+  - **MTBF (Mean Time Between Failure)** → Reliability.  
+  - **MTTR (Mean Time to Repair)** → Recovery speed.  
+  - **MOR (Minimum Operating Requirements)** → Bare minimum resources needed to function.  
+
+👉 **Relevance vs. Criticality**:  
+- Some processes (like auditing) are important, but **not critical**.  
+- BIA focuses on **criticality** (downtime impact).  
+
+---
+
+### Identify Recovery Strategies
+- **Facility Recovery Options**:
+  - Subscription services: **Hot site**, **Warm site**, **Cold site**.
+### Hot vs Warm vs Cold Site
+
+| Site Type   | Description | Cost | Recovery Speed | Example Use |
+|-------------|-------------|------|----------------|-------------|
+| **Hot Site**  | Fully equipped facility with hardware, software, and near-real-time data. Ready to take over immediately. | $$$ (most expensive) | Fastest (minutes to hours) | Mission-critical systems (banks, hospitals) |
+| **Warm Site** | Partially equipped (infrastructure + some hardware). Data must be loaded/restored before use. | $$ (moderate) | Medium (hours to days) | Medium-critical systems |
+| **Cold Site** | Empty facility (power, HVAC, network only). No servers or data pre-installed. | $ (cheapest) | Slowest (days to weeks) | Low-priority systems or budget-limited orgs |
+
+  - Reciprocal agreements (use another company’s site).  
+  - Redundant/mirrored site (partial/full).  
+  - Outsourcing to third-party providers.  
+  - Rolling hot site (mobile recovery facility).  
+
+---
+
+### Types of Tests
+- **Checklist Test**: Review plan.  
+- **Structured Walkthrough (Tabletop Test)**: Discuss plan in a meeting.  
+- **Simulation Test**: Simulate an actual disaster (without shutting down).  
+- **Parallel Test**: Run systems at alternate site while production still runs.  
+- **Full Interruption Test**: Shut down primary site and failover completely (most risky).  
