@@ -822,7 +822,7 @@ It ensures data can be restored if:
   - **MTBF (Mean Time Between Failure)** → Reliability.  
   - **MTTR (Mean Time to Repair)** → Recovery speed.  
   - **MOR (Minimum Operating Requirements)** → Bare minimum resources needed to function.
-![BIA](images/BIA.jpg)
+![BIA](images/BIA.jpeg)
 
 👉 **Relevance vs. Criticality**:  
 - Some processes (like auditing) are important, but **not critical**.  
