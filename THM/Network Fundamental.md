@@ -137,3 +137,4 @@ Similar to humans having **names** and **fingerprints**, devices also have two i
 
 - Example:  
   `ping 192.168.1.254`
+  
