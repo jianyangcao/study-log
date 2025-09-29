@@ -339,7 +339,101 @@ Example: `192.168.1.1`
 
 ---
 
-# 3 OSI Model
 
+# 3 OSI Model (Open Systems Interconnection)
+## Overview
+- Framework for how networked devices **send, receive, and interpret data**.  
+- Provides **7 layers** (from **Layer 7 → Layer 1**) with specific responsibilities.  
+- Ensures interoperability between devices from different vendors.  
+- Process of data handling is called **encapsulation** (data gets headers/trailers at each layer).  
+![osi](image/osi.png)
+
+---
+
+## OSI Layers
+
+### 1. **Physical Layer** (Layer 1)
+- Concerned with **hardware and signals**.  
+- Transmits raw bits (`1`s and `0`s) using electrical, light, or radio signals.  
+- Examples: Ethernet cables, fiber optics, Wi-Fi radio waves.  
+
+---
+
+### 2. **Data Link Layer** (Layer 2)
+- Responsible for **physical addressing** and reliable link-to-link delivery.  
+- Uses **MAC addresses** (burned into NICs) to identify devices.  
+- Tasks:
+  - Add destination/source MAC to frames.  
+  - Ensure data is formatted for transmission.  
+- Devices: Switches, NICs.  
+- **Vulnerable to MAC spoofing**.  
+
+---
+
+### 3. **Network Layer** (Layer 3)
+- Handles **routing** and **logical addressing (IP addresses)**.  
+- Determines **best path** for packets.  
+- Protocols:  
+  - **OSPF** (Open Shortest Path First)  
+  - **RIP** (Routing Information Protocol)  
+- Devices: Routers.  
+- Key questions answered:  
+  - Shortest path?  
+  - Most reliable path?  
+  - Fastest connection (copper vs fiber)?  
+
+---
+
+### 4. **Transport Layer** (Layer 4)
+- Ensures **end-to-end communication**.  
+- Protocols: **TCP** and **UDP**.  
+
+**TCP (Transmission Control Protocol)**  
+- Reliable, connection-oriented, error-checking.  
+- Slower due to overhead.  
+- Use cases: Email, file transfer, web browsing.
+  ![osi](image/tcp.png)
+
+**UDP (User Datagram Protocol)**  
+- Faster, connectionless, no guarantee.  
+- Unreliable but efficient.  
+- Use cases: Streaming, VoIP, ARP, DHCP.  
+![osi](image/udp.png)
+
+---
+
+### 5. **Session Layer** (Layer 5)
+- Manages and maintains **sessions (connections)** between devices.  
+- Responsibilities:  
+  - Open/close connections.  
+  - Re-establish if lost.  
+  - Use **checkpoints** to resume transmission.  
+- Unique per communication session.  
+
+---
+
+### 6. **Presentation Layer** (Layer 6)
+- Acts as a **translator** between application data and network format.  
+- Provides **data formatting, compression, and encryption**.  
+- Examples: SSL/TLS encryption, JPEG, MP3.  
+
+---
+
+### 7. **Application Layer** (Layer 7)
+- Closest to the **end-user**.  
+- Provides **protocols and interfaces** for applications.  
+- Examples:  
+  - **HTTP/HTTPS** (web browsing)  
+  - **DNS** (domain to IP resolution)  
+  - **FTP** (file transfer)  
+  - **SMTP** (email)  
+
+---
+
+## Key Takeaways
+- OSI layers build from **physical transmission** up to **user-facing applications**.  
+- Each layer has **distinct tasks**, ensuring modular design.  
+- TCP = Reliable, UDP = Fast but unreliable.  
+- **MAC = physical address (Layer 2), IP = logical address (Layer 3)**.  
 
   
