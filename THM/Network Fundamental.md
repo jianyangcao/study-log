@@ -170,9 +170,7 @@ A **topology** is the design or structure of how devices are connected in a netw
   - Bottlenecks due to shared medium.  
   - Troubleshooting is difficult.  
   - **Single point of failure** = if cable breaks, entire network fails.
-    ```mermaid
-    graph LR
-    A[PC1] --- B[Backbone Cable] --- C[PC2] --- D[PC3] --- E[PC4]
+![Bus](image/bus.png)
 
 
 ---
@@ -185,9 +183,7 @@ A **topology** is the design or structure of how devices are connected in a netw
 - **Disadvantages**:  
   - Inefficient (data may pass through many devices).  
   - Failure of one cable/device can break the entire ring.
-  ```mermaid
-  graph LR
-    A[PC1] --- B[PC2] --- C[PC3] --- D[PC4] --- A
+![ring](image/ring.png)
 
 
 ---
@@ -219,6 +215,131 @@ A **topology** is the design or structure of how devices are connected in a netw
 | Ring      | Devices in loop              | Less bottleneck than bus   | One failure breaks whole ring  |
 
 ---
+# Subnetting Notes
+
+## What is Subnetting?
+- Subnetting = dividing a larger network into smaller, manageable subnetworks.  
+- Think of it as **slicing a cake** → each slice = subnet.  
+- Helps assign network portions to specific groups (e.g., Accounting, Finance, HR).
+
+---
+
+## Purpose of Subnetting
+- Organize and control network traffic  
+- Improve efficiency and security  
+- Provide full control over IP address usage  
+
+---
+
+## IP Address Structure
+- IPv4 address = **32 bits** (4 octets, 0–255 each)  
+- Subnet mask also uses 32 bits  
+
+Example: `192.168.1.1`
+
+- Octet 1 = 192  
+- Octet 2 = 168  
+- Octet 3 = 1  
+- Octet 4 = 1  
+
+---
+
+## Subnet Address Types
+
+| **Type**           | **Purpose**                                                                 | **Explanation**                                                                                      | **Example**      |
+|---------------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|------------------|
+| **Network Address** | Identifies start of the network. Used to identify network existence.        | A device with IP `192.168.1.100` will be on the network `192.168.1.0`.                               | `192.168.1.0`    |
+| **Host Address**    | Identifies individual devices in subnet.                                   | Example: `192.168.1.1` for one host.                                                                 | `192.168.1.100`  |
+| **Default Gateway** | Special address that routes traffic to other networks.                     | Usually first (`.1`) or last (`.254`) host address. Sends data outside subnet (e.g., to the Internet). | `192.168.1.254`  |
+
+---
+
+## Benefits of Subnetting
+- **Efficiency** → reduces congestion by splitting traffic  
+- **Security** → isolates sensitive devices (e.g., HR PCs vs public Wi-Fi)  
+- **Full Control** → admins can assign resources to specific groups  
+
+---
+
+## Example Scenarios
+### Business with Multiple Departments
+- **Accounting subnet**  
+- **Finance subnet**  
+- **Human Resources subnet**
+![internet](image/internet.png)
+
+### Café Example
+1. Subnet 1: Employees, cash registers, internal systems  
+2. Subnet 2: Public Wi-Fi hotspot  
+
+➡️ Separation prevents public users from accessing sensitive business devices  
+
+---
+
+# Address Resolution Protocol (ARP)
+
+## What is ARP?
+- ARP = Address Resolution Protocol  
+- Used to map **IP addresses** (logical identifier) to **MAC addresses** (physical identifier).  
+- Each device keeps a log of MAC addresses associated with IP addresses (ARP cache).  
+- Enables devices to find each other on the same network.  
+
+---
+
+## How Does ARP Work?
+1. **ARP Request**  
+   - Device sends a broadcast: *"Who has this IP address?"*  
+   - All devices on the network see the request.  
+
+2. **ARP Reply**  
+   - The device that owns the IP responds with its **MAC address**.  
+   - The requesting device stores the mapping in its **ARP cache** for future use.  
+
+---
+
+## Example
+- Device A wants to send data to `192.168.1.10`  
+- Device A doesn’t know the MAC
+![arp](image/arp.png)
+
+---
+
+# DHCP (Dynamic Host Configuration Protocol)
+
+## What is DHCP?
+- A network protocol that **automatically assigns IP addresses** and other network configuration details (subnet mask, gateway, DNS) to devices.  
+- Saves time and reduces errors compared to manual IP assignment.  
+
+---
+
+## How DHCP Works (DORA Process)
+1. **DHCP Discover**  
+   - Device broadcasts a request to find a DHCP server.  
+
+2. **DHCP Offer**  
+   - DHCP server responds with an available IP address.  
+
+3. **DHCP Request**  
+   - Device replies, asking to use the offered IP.  
+
+4. **DHCP ACK**  
+   - DHCP server confirms and finalizes the lease of the IP address.  
+
+---
+
+## Benefits
+- **Automatic** → No need for manual IP assignment.  
+- **Efficient** → Reduces human errors and IP conflicts.  
+- **Scalable** → Works well for networks with many devices.  
+
+---
+
+✅ **Summary:** DHCP is the protocol that automates IP address assignment using the **DORA process (Discover, Offer, Request, ACK)**.
+![DHCP](image/dhcp.png)
+
+---
+
+
 
 
   
