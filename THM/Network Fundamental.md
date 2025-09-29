@@ -140,7 +140,7 @@ Similar to humans having **names** and **fingerprints**, devices also have two i
   
 ---
 
-## 2
+## 2 Intro to LAN
 
 ## LAN Topologies
 A **topology** is the design or structure of how devices are connected in a network.  
@@ -152,7 +152,13 @@ A **topology** is the design or structure of how devices are connected in a netw
   - Centralized management.  
 - **Disadvantages**:  
   - Higher cost (more cabling + equipment).  
-  - Central device is a **single point of failure**.  
+  - Central device is a **single point of failure**.
+  ```mermaid
+  graph TD
+    A[Switch/Hub] --> B[PC1]
+    A --> C[PC2]
+    A --> D[PC3]
+    A --> E[PC4]
 
 ---
 
@@ -163,7 +169,11 @@ A **topology** is the design or structure of how devices are connected in a netw
 - **Disadvantages**:  
   - Bottlenecks due to shared medium.  
   - Troubleshooting is difficult.  
-  - **Single point of failure** = if cable breaks, entire network fails.  
+  - **Single point of failure** = if cable breaks, entire network fails.
+    ```mermaid
+    graph LR
+    A[PC1] --- B[Backbone Cable] --- C[PC2] --- D[PC3] --- E[PC4]
+
 
 ---
 
@@ -174,7 +184,11 @@ A **topology** is the design or structure of how devices are connected in a netw
   - Easy fault isolation.  
 - **Disadvantages**:  
   - Inefficient (data may pass through many devices).  
-  - Failure of one cable/device can break the entire ring.  
+  - Failure of one cable/device can break the entire ring.
+  ```mermaid
+  graph LR
+    A[PC1] --- B[PC2] --- C[PC3] --- D[PC4] --- A
+
 
 ---
 
@@ -203,8 +217,6 @@ A **topology** is the design or structure of how devices are connected in a netw
 | Star      | Central device (switch/hub)  | Reliable, scalable         | Central device failure = outage |
 | Bus       | Single backbone cable        | Simple, cheap              | Bottlenecks, single point of failure |
 | Ring      | Devices in loop              | Less bottleneck than bus   | One failure breaks whole ring  |
-| Switch    | Connects devices via ports   | Efficient, reduces traffic | Costlier than hub              |
-| Router    | Connects networks            | Path redundancy, Internet access | More complex, configuration needed |
 
 ---
 
