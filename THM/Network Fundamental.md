@@ -138,3 +138,75 @@ Similar to humans having **names** and **fingerprints**, devices also have two i
 - Example:  
   `ping 192.168.1.254`
   
+---
+
+## 2
+
+## LAN Topologies
+A **topology** is the design or structure of how devices are connected in a network.  
+
+### Star Topology
+- Devices connect to a **central device** (switch/hub).  
+- **Advantages**:  
+  - Reliable, scalable (easy to add devices).  
+  - Centralized management.  
+- **Disadvantages**:  
+  - Higher cost (more cabling + equipment).  
+  - Central device is a **single point of failure**.  
+
+---
+
+### Bus Topology
+- All devices share a **single backbone cable**.  
+- **Advantages**:  
+  - Simple and cost-effective.  
+- **Disadvantages**:  
+  - Bottlenecks due to shared medium.  
+  - Troubleshooting is difficult.  
+  - **Single point of failure** = if cable breaks, entire network fails.  
+
+---
+
+### Ring Topology
+- Devices form a **loop**, each forwarding data to the next until it reaches destination.  
+- **Advantages**:  
+  - Less prone to bottlenecks than bus.  
+  - Easy fault isolation.  
+- **Disadvantages**:  
+  - Inefficient (data may pass through many devices).  
+  - Failure of one cable/device can break the entire ring.  
+
+---
+
+## Switches
+- A **switch** connects multiple devices in a network (computers, printers, etc.) via **ports**.  
+- More efficient than **hubs/repeaters**:  
+  - Sends data only to the **intended target** (not all devices).  
+  - Reduces network traffic.  
+- Found in larger networks (businesses, schools).  
+- Support many ports (4, 8, 16, 24, 32, 64).  
+
+---
+
+## Routers
+- A **router** connects **different networks** together (e.g., LAN → Internet).  
+- Uses **routing tables** to determine best path for data delivery.  
+- Enables communication between networks.  
+- Provides **path redundancy** (multiple routes possible).  
+
+---
+
+## Quick Comparison Table
+
+| Topology  | Main Feature                  | Advantage                  | Disadvantage                   |
+|-----------|-------------------------------|----------------------------|--------------------------------|
+| Star      | Central device (switch/hub)  | Reliable, scalable         | Central device failure = outage |
+| Bus       | Single backbone cable        | Simple, cheap              | Bottlenecks, single point of failure |
+| Ring      | Devices in loop              | Less bottleneck than bus   | One failure breaks whole ring  |
+| Switch    | Connects devices via ports   | Efficient, reduces traffic | Costlier than hub              |
+| Router    | Connects networks            | Path redundancy, Internet access | More complex, configuration needed |
+
+---
+
+
+  
