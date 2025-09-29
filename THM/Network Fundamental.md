@@ -436,4 +436,194 @@ Example: `192.168.1.1`
 - TCP = Reliable, UDP = Fast but unreliable.  
 - **MAC = physical address (Layer 2), IP = logical address (Layer 3)**.  
 
-  
+---
+
+# 4 Networking Notes – Packets, TCP/UDP, Ports, Protocols
+
+---
+
+## Packets vs Frames
+- **Packet**: Data from Layer 3 (Network Layer) containing IP header + payload.
+- **Frame**: Data at Layer 2 (Data Link Layer), adds info like MAC address.
+- **Encapsulation**: Process of wrapping packets with additional headers (like an envelope).
+- Packets are broken into small pieces to avoid bottlenecks, then reassembled.
+
+### Notable Packet Headers
+| Header              | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| Time to Live (TTL)  | Expiry timer so packets don’t clog network forever.                         |
+| Checksum            | Integrity check (detects corruption).                                       |
+| Source Address      | IP address of sender (where data is from).                                  |
+| Destination Address | IP address of receiver (where data is going).                               |
+
+---
+
+## TCP (Transmission Control Protocol)
+- **Connection-based**: Requires a handshake before sending data.
+- Ensures ordered, reliable, and complete delivery.
+- Example: web browsing, email, file transfer.
+
+### Advantages & Disadvantages
+| Advantages of TCP                                   | Disadvantages of TCP                                      |
+|-----------------------------------------------------|-----------------------------------------------------------|
+| Guarantees data integrity and accuracy.             | Requires stable connection; retransmits lost packets.      |
+| Synchronizes devices to prevent flooding.           | Slow connections can bottleneck devices.                   |
+| Reliability through many checks and processes.      | Slower than UDP due to overhead.                          |
+
+### TCP Packet Headers
+| Header              | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| Source Port         | Port opened by sender (random).                                             |
+| Destination Port    | Port of receiving service (e.g., webserver 80).                             |
+| Source IP           | IP of sender.                                                              |
+| Destination IP      | IP of receiver.                                                            |
+| Sequence Number     | Numbers data pieces for correct order.                                      |
+| Acknowledgement Num | Confirms received sequence number.                                          |
+| Checksum            | Verifies data integrity.                                                    |
+| Data                | Payload (actual file/content).                                             |
+| Flag                | Controls handling (e.g., SYN, ACK, FIN).                                   |
+
+### TCP Three-Way Handshake
+| Step | Message | Description                                                   |
+|------|---------|---------------------------------------------------------------|
+| 1    | SYN     | Client initiates connection.                                  |
+| 2    | SYN/ACK | Server acknowledges and syncs.                                |
+| 3    | ACK     | Client confirms; connection established.                      |
+
+### TCP Control Flags
+- **SYN**: Initiates connection.  
+- **ACK**: Confirms receipt.  
+- **FIN**: Gracefully closes connection.  
+- **RST**: Abruptly ends connection.
+![osi](image/tcp2.png)
+![osi](image/tcp3.png)
+
+---
+
+## UDP (User Datagram Protocol)
+- **Stateless**, no handshake.  
+- Faster but unreliable (no guarantee of delivery/order).  
+- Used in streaming, gaming, VoIP.  
+
+### Advantages & Disadvantages
+| Advantages of UDP                       | Disadvantages of UDP                             |
+|-----------------------------------------|--------------------------------------------------|
+| Very fast, minimal overhead.            | Doesn’t guarantee delivery.                      |
+| Flexible for developers.                | Unstable connections give poor user experience.  |
+| No reserved connection (saves bandwidth)| No error checking or correction.                 |
+
+### UDP Packet Headers
+| Header              | Description                                                                 |
+|---------------------|-----------------------------------------------------------------------------|
+| TTL                 | Expiry timer for packet.                                                    |
+| Source Address      | Sender IP.                                                                  |
+| Destination Address | Receiver IP.                                                                |
+| Source Port         | Randomly chosen sending port.                                               |
+| Destination Port    | Service port on receiver (e.g., 53 for DNS).                                |
+| Data                | Payload.                                                                    |
+
+![osi](image/udp2.png)
+
+---
+
+## Ports
+- Ports = entry/exit points for network communication.
+- Range: **0–65535**
+  - **0–1023** = Well-known/common ports.  
+  - **1024–49151** = Registered ports.  
+  - **49152–65535** = Dynamic/private ports.  
+
+Analogy: Like ships docking at a harbor – must match the correct port.
+
+---
+
+## Common Protocols and Ports
+| Protocol | Port | Description                                                                 |
+|----------|------|-----------------------------------------------------------------------------|
+| FTP      | 21   | File Transfer Protocol (file sharing between client and server).            |
+| SSH      | 22   | Secure Shell – encrypted login and remote management.                       |
+| HTTP     | 80   | Web browsing (non-secure).                                                  |
+| HTTPS    | 443  | Secure web browsing (encrypted HTTP).                                       |
+| SMB      | 445  | File and printer sharing across networks.                                   |
+| RDP      | 3389 | Remote Desktop Protocol (visual login to another system).                   |
+
+---
+
+# 5 Networking Concepts: Port Forwarding, Firewalls, VPN, Router, Switch, VLAN
+
+---
+
+## 🌐 Port Forwarding
+- **Definition**: Allows external devices (from the internet) to access services inside a private network.
+- **Without port forwarding**: Services (e.g., webserver at `192.168.1.10:80`) are only available locally (intranet).
+- **With port forwarding**: Router maps external/public IP + port (e.g., `82.62.51.70:80`) to internal server, making it accessible to other networks.
+
+⚠️ **Note**:  
+- Port forwarding = opens ports.  
+- Firewall = decides if traffic can pass through.
+
+---
+
+## 🔥 Firewalls
+- **Definition**: A security device/software that controls traffic entering or leaving a network.
+- **Decides based on**:
+  - Source (where traffic comes from)
+  - Destination (where traffic is going)
+  - Port (what service is being accessed)
+  - Protocol (TCP, UDP, etc.)
+
+### Firewall Categories
+| Category  | Description |
+|-----------|-------------|
+| **Stateful** | Inspects entire connection. Dynamic, resource-heavy. Can block whole device if connection is bad. |
+| **Stateless** | Uses static rules for **individual packets**. Lightweight but less flexible. Good for large traffic (e.g., DDoS). |
+
+---
+
+## 🔒 VPN (Virtual Private Network)
+- **Definition**: Creates a secure, encrypted tunnel between networks over the internet.
+- **Purpose**:
+  - Connects different offices/networks.
+  - Provides **privacy** (traffic encryption, prevents sniffing).
+  - Provides **anonymity** (but depends on VPN provider).
+- **Benefits**:
+  - Connects remote offices/resources.
+  - Protects traffic on public Wi-Fi.
+  - Used by journalists/activists for privacy.
+
+### VPN Technologies
+| Technology | Description |
+|------------|-------------|
+| **PPP** | Authenticates & encrypts data. Needs private key + certificate. Cannot leave network by itself. |
+| **PPTP** | Easy to set up, widely supported. Weak encryption. |
+| **IPSec** | Strong encryption using IP protocol. Harder to set up but highly secure. |
+
+---
+
+## 📡 Router
+- **Definition**: Connects networks and forwards packets between them.
+- **Works at**: Layer 3 (Network Layer) of OSI.
+- **Functions**:
+  - Finds best path (shortest, most reliable, fastest).
+  - Can handle port forwarding & firewall rules.
+
+---
+
+## 🔀 Switch
+- **Definition**: Connects multiple devices within a network using Ethernet.
+- **Layer 2 Switch**:
+  - Operates at Data Link Layer.
+  - Forwards frames using MAC addresses.
+- **Layer 3 Switch**:
+  - Can route packets like a router.
+  - Uses IP addresses for packet forwarding.
+
+---
+
+## 🧩 VLAN (Virtual Local Area Network)
+- **Definition**: Logical segmentation of a physical network into multiple virtual networks.
+- **Benefits**:
+  - Separates traffic for security and efficiency.
+  - Example: Sales dept. (VLAN 1) and Accounting dept. (VLAN 2) share the same physical switch but operate in different virtual networks.
+
+
