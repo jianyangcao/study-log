@@ -561,6 +561,7 @@ Analogy: Like ships docking at a harbor – must match the correct port.
 ⚠️ **Note**:  
 - Port forwarding = opens ports.  
 - Firewall = decides if traffic can pass through.
+![portforwarding](image/portforwarding.png)
 
 ---
 
@@ -625,5 +626,6 @@ Analogy: Like ships docking at a harbor – must match the correct port.
 - **Benefits**:
   - Separates traffic for security and efficiency.
   - Example: Sales dept. (VLAN 1) and Accounting dept. (VLAN 2) share the same physical switch but operate in different virtual networks.
+  ![portforwarding](image/vlan.png)
 
 
