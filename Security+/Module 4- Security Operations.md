@@ -464,3 +464,158 @@ Wireless networks require careful planning (site surveys, heat maps, analyzer to
 - Avoid WEP/WPA.  
 - For enterprise, implement **802.1X with RADIUS**.  
 - Secure Bluetooth by turning off discoverability and disabling when not in use.
+
+---
+
+# 4.6 Proper Hardware, Software, and Data Asset Management
+
+## Acquisition/Procurement of a System
+- **Acquisition/procurement process**: Steps to evaluate, purchase, or develop a system.
+- **Assignment/accounting**: Tracking system usage and financial accountability.
+- **Ownership**: Clearly define who is responsible for the system.
+- **Classification**: Labeling assets based on sensitivity (e.g., public, internal, confidential).
+- **Monitoring/asset tracking**: Continuously track where systems and devices are located.
+- **Inventory**: Maintain a complete list of assets.
+- **Enumeration**: Numbering/recording assets for easier tracking.
+- **Disposal/decommissioning**: Secure removal when assets are no longer used.
+- **Sanitization**: Removing sensitive data before re-use or disposal.
+- **Destruction**: Physical destruction of media or devices to prevent data recovery.
+- **Certification**: Verification that systems meet requirements before use.
+- **Data retention**: Defining how long data must be stored (for legal, compliance, or business needs).
+
+---
+
+## Acquisition or Development of a System: Feasibility Study
+Factors to decide whether to **develop** or **acquire** a system:
+- **Functionality**: Does the system meet required business needs?
+- **Cost**: Compare cost of building vs. buying.
+- **Resources**: Staff, hardware, and time needed for development.
+- **Compatibility**: Must align with business plans, IT infrastructure, and risk appetite.
+
+---
+
+## Requirements Definition
+Clearly define:
+- What the system should do.
+- How users will interact with it.
+- Conditions under which the system must operate.
+- Information criteria the system should meet.
+
+**Example activities:**
+- Identify and consult stakeholders.
+- Identify relevant data privacy and governance requirements.
+- Analyze requirements to detect/correct conflicts and set priorities.
+- Define system boundaries.
+- Identify security requirements.
+
+---
+
+## System Acquisition and Design
+- **Software selection and acquisition**
+  - Consider risks/benefits of developing in-house vs. buying a complete/tested system.
+  - Decision depends on cost, availability, and time-to-deploy.
+- **Design**
+  - Develop a detailed design based on requirements.
+  - Illustrate how data flows through the system (inputs, outputs, processing).
+  - Develop test plans.
+
+---
+
+## Configuration or Development
+- **Configuration (purchased system)**
+  - Define, track, and control changes in the acquired system.
+  - Integrate ERP or other systems into existing IT infrastructure.
+  - Use change management policies (roles, impact assessment, approvals).
+
+- **Development (in-house)**
+  - Follow detailed design from earlier phase.
+  - Activities include:
+    - Coding and debugging.
+    - Ensuring security by design (security is built in, not added later).
+    - Converting data from old system to new system.
+
+---
+
+## Final Testing, Certification, and Implementation
+- Perform **system testing** to ensure requirements are met.
+- Certification confirms system is secure and functional.
+- Implementation puts the system into production use.
+
+---
+
+## Post-Implementation Review
+- Review performance, security, and compliance after deployment.
+- Identify lessons learned for future projects.
+
+---
+
+## Decommissioning Systems
+- When systems are retired, ensure:
+  - Data is securely removed (sanitization or destruction).
+  - Documentation of the retirement process.
+  - No sensitive data remains accessible.
+
+---
+
+# 4.7 Vulnerability Assessments
+
+## What are Vulnerabilities?
+- Areas where an organization is **not fully protected** and can be exploited by attackers.
+- Security+ expects you to know **types, methods, and tools** used to identify vulnerabilities.
+
+---
+
+## Examples of Vulnerabilities
+- **Untrained staff** clicking on phishing links.  
+- **Open network ports** in common areas that are live but not secured.  
+- **No alarm system** to detect intrusions.  
+- **Servers and critical systems** without access controls.  
+- **Laptops with VPN access/sensitive data** not encrypted.  
+- **Outdated/unsupported software** (legacy devices).  
+
+*(Explanation: These are common weak spots that attackers exploit. Many map directly to Security+ test questions.)*
+
+---
+
+## Vulnerability Analysis Approaches
+- **Static analysis**: Manually reviewing source code or using tools to detect coding errors.  
+- **Dynamic analysis**: Evaluating software/system while it is running.  
+- **Side-channel analysis**: Observing system behavior/data flows (e.g., sniffers).  
+- **Reverse engineering**: Deconstructing software/hardware to see how it works.  
+
+---
+
+## Vulnerability Analysis Methods
+- **Wireless vulnerability scan**: Identify signal coverage, configs, and weaknesses (e.g., Reaver, KRACK).  
+- **Software composition analysis**: Check source code for open-source components with known flaws.  
+- **Fuzzing**: Inject malformed data to test how an app handles unexpected input.  
+- **Pivoting**: Using a compromised system to target others in the same network.  
+- **Post-exploitation**: Actions after initial compromise to maintain access.  
+- **Persistence**: Attacker’s ability to stay hidden and maintain control.  
+
+---
+
+## Vulnerability Analysis Tools
+- **Protocol analyzer**: Captures network traffic (e.g., Wireshark).  
+- **Network traffic analyzer**: Similar but sensor-based (e.g., Zeek).  
+- **Port scanner**: Finds open ports and services (e.g., Nmap).  
+- **HTTP interceptor**: Inspects/modifies HTTP(S) traffic (e.g., Burp Suite).  
+- **SCAP scanner**: Uses SCAP to scan devices against baselines (e.g., DoD SCAP Scanner).  
+- **Vulnerability scanner**: Finds known vulnerabilities, config issues, weak defaults (e.g., Nessus).  
+- **Exploit framework**: Pre-built attack tools (e.g., Metasploit, PowerShell Empire).  
+- **Password cracker**: Tests password strength (e.g., John the Ripper, Hashcat).  
+
+---
+
+## Dependency Management
+- Keep track of all **software libraries and dependencies** since outdated ones may contain vulnerabilities.
+
+---
+
+## Vulnerability Analysis Dependencies
+- **Permissions and access**: Testers may need ID badges, background checks, etc.  
+- **Facility considerations**: Onsite escorting, restricted access, clearance requirements.  
+- **Physical security**: Protects testers and data during assessment.  
+- **Reason for corrections/changes**: Assessments should tie findings to business/IT needs.  
+
+---
