@@ -344,40 +344,123 @@ Wireless networks require careful planning (site surveys, heat maps, analyzer to
 
 ---
 
-4.5 Wireless Configuration
-Antenna Types
-  omnidiriectional antenna: raidation power equally distributed in all horizontal directons
-  directional(e.g. Yagi) Antenna: radion power concentrated in one specific direction
-Wireless Security: encryption
-  WEP(wired equivalednt privacy)
-    RC-4(stream cipher--weak)
-    easily trackable
-    only option for 802.11b
-    static keys
-    low encryption mode 64 bits key
-    high encryption mode 128 bits key
-    intial vector
-  WPA(Wi-Fi protected access)
-    introduced TKIP(temporal key integrity protocol)--dynamic keys
-    still used RC-4
-    longer intial vecotor
-  WPA 2
-    AES(block cipher--more secure)
-    CCMP(conter mode cipher block chaining message authentication protocol)
-    not backwards compatible
-  WPA 3
-    Dragonfly algorithm to protect hacdshaking, Galois Counter Mode for integrity checking
-Authentication: decentralized
-IEEE 802.1x-Remote Authentication Dial in User Service(EAPoL-Externsive Autehntication Protocol over LAN)
-Bluetooth
-  Bluetooth is a personal area network protocol designed to free devices from physical wires
-  bluetooth modes
-  discovery modes
-  automatic pairing
-  bluejacking:sending spam to nearby bluetooth devices
-  blue snarfing:copies informaiton off of remote devices
-  blue bugging
-    more serious
-    allows ful use of phone
-    allows on to make calls
-    can eavesdrop on calls
+# 4.5 Wireless Configuration
+
+## 🔹 Antenna Types
+- **Omnidirectional Antenna**  
+  - Radiation power distributed equally in all directions (horizontal plane).  
+  - Example: Wi-Fi access point antennas.  
+  - Pros: Covers a wide area.  
+  - Cons: Easier for attackers to detect signals outside secure areas.
+
+- **Directional Antenna (e.g., Yagi Antenna)**  
+  - Radiation power concentrated in one specific direction.  
+  - Pros: Stronger signal in target direction, longer range.  
+  - Cons: Limited coverage angle.
+
+---
+
+## 🔹 Wireless Security: Encryption
+
+### WEP (Wired Equivalent Privacy)
+- Uses **RC4 stream cipher** (weak).  
+- Issues:  
+  - Easily crackable.  
+  - Only option for old **802.11b** networks.  
+  - **Static keys** (don’t change).  
+- Encryption strength:  
+  - Low: 64-bit key.  
+  - High: 128-bit key.  
+- Uses an **Initialization Vector (IV)**, but it’s too short and predictable.  
+- ⚠️ Considered insecure and deprecated.
+
+---
+
+### WPA (Wi-Fi Protected Access)
+- Introduced **TKIP (Temporal Key Integrity Protocol)** with **dynamic keys**.  
+- Still relied on **RC4**.  
+- Used longer initialization vector than WEP.  
+- Transitional step—no longer secure today.
+
+---
+
+### WPA2
+- Replaced RC4 with **AES (block cipher)**.  
+- Uses **CCMP (Counter Mode with Cipher Block Chaining Message Authentication Protocol)**.  
+- Provides strong encryption + integrity.  
+- **Not backwards compatible** with WEP/WPA (different ciphers).  
+- Still widely in use, but vulnerable to some brute-force/side-channel attacks.
+
+---
+
+### WPA3
+- Uses **Dragonfly handshake (SAE – Simultaneous Authentication of Equals)**.  
+- Protects against offline password cracking.  
+- Uses **Galois Counter Mode (GCM)** for integrity checking.  
+- Stronger security, mandatory in modern devices.
+
+---
+
+## 🔹 Authentication
+
+### Decentralized Authentication
+- Client authenticates **directly** with AP/VPN/RAS.  
+- Each access device manages its own credentials.  
+- Simple, but not scalable.  
+- Example: **WPA2-Personal (PSK)** at home Wi-Fi.
+![decentralized](images/centralizd.png)
+
+### Centralized Authentication (Enterprise)
+- Based on **802.1X** standard.  
+- Roles:  
+  - **Supplicant** → client device (Wi-Fi laptop, VPN client).  
+  - **Authenticator** → AP, VPN gateway, or RAS.  
+  - **Authentication Server** → RADIUS/TACACS+.  
+- Process:  
+  1. Supplicant requests access.  
+  2. Authenticator forwards credentials.  
+  3. Server validates (e.g., via Active Directory).  
+  4. Access granted/denied.
+  ![centralized](images/decentralized.png)
+     
+- Protocol: **EAPoL (Extensible Authentication Protocol over LAN)**.  
+- Example: **WPA2/WPA3-Enterprise** in corporate Wi-Fi.
+
+### Comparison Table
+
+| Feature            | Decentralized (PSK)            | Centralized (802.1X)                 |
+|--------------------|--------------------------------|---------------------------------------|
+| Who validates?     | Access Point itself            | Central server (RADIUS/TACACS+)       |
+| Credential type    | Shared Wi-Fi password (PSK)    | Individual user credentials           |
+| Scalability        | Poor (hard to manage many APs) | High (central policy control)         |
+| Security level     | Weaker                         | Stronger, enterprise-grade            |
+| Example use case   | Home Wi-Fi                     | Corporate Wi-Fi with AD integration   |
+
+📌 **Key takeaway for Security+**:  
+- **Decentralized = WPA2-Personal (PSK)**.  
+- **Centralized = WPA2/WPA3-Enterprise with RADIUS**.  
+
+---
+
+## 🔹 Bluetooth Security
+- **Bluetooth = Personal Area Network (PAN)** protocol (short range, cable replacement).  
+
+### Modes
+- **Discovery Mode** → device visible to others.  
+- **Automatic Pairing** → convenience, but risk if insecure.
+
+### Threats
+- **Bluejacking**: Sending spam messages to nearby devices.  
+- **Bluesnarfing**: Stealing information (contacts, files) from a device.  
+- **Bluebugging**: More severe → attacker gains full control of the phone:  
+  - Make calls.  
+  - Send texts.  
+  - Eavesdrop on conversations.  
+
+---
+
+✅ **Summary:**  
+- Use **WPA3** wherever possible.  
+- Avoid WEP/WPA.  
+- For enterprise, implement **802.1X with RADIUS**.  
+- Secure Bluetooth by turning off discoverability and disabling when not in use.
