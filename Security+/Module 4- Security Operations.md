@@ -295,5 +295,89 @@
 - **Mitigation** = segmentation, firewalls, firmware updates, vendor management.  
 
 ---
+# 4.4 Wireless Security
 
-  
+## 🔹 Installation Considerations
+When setting up wireless networks, proper planning improves performance and reduces security risks.
+
+- **Site Surveys**  
+  Assess the physical environment to determine the best placement for wireless access points (WAPs). Helps avoid dead zones and interference.
+
+- **Heat Maps (Coverage Maps)**  
+  Visual maps showing wireless signal strength across an area. Useful for spotting weak coverage areas.
+
+- **WiFi Analyzers**  
+  Tools that measure signal strength, interference, and channel usage. Help optimize performance and security.
+
+- **Channel Overlaps**  
+  Occur when nearby wireless networks use the same or overlapping frequencies (e.g., 2.4 GHz channels). Can cause interference and degraded performance.
+
+- **Wireless Access Point (WAP) Placement**  
+  Proper placement ensures good coverage while minimizing signal leakage outside secure areas (reducing risk of external attacks).
+
+---
+
+## 🔹 Wireless Security Problems
+
+- **Unauthorized Access**  
+  Attackers connect to a wireless network without permission, often exploiting weak or default passwords.
+
+- **Sniffing**  
+  Capturing and analyzing wireless traffic. If unencrypted, attackers can steal credentials or sensitive data.
+
+- **War Driving**  
+  Driving around with a laptop/antenna to discover and map unsecured or poorly secured wireless networks.
+
+- **Unauthorized Access Points & Evil Twins (Man-in-the-Middle)**  
+  - **Unauthorized Access Point (Rogue AP):** An attacker sets up a wireless AP on the network without authorization.  
+  - **Evil Twin:** A fake AP that mimics a legitimate one. Users unknowingly connect, allowing attackers to intercept traffic (MITM attack).
+
+- **Wi-Fi Protected Setup (WPS) Vulnerability**  
+  - WPS is a feature meant to simplify connecting devices with a PIN or button.  
+  - Vulnerable to brute-force attacks against the WPS PIN.  
+  - Best practice: disable WPS.
+
+---
+
+✅ **Summary:**  
+Wireless networks require careful planning (site surveys, heat maps, analyzer tools) and strong protections. Security threats like sniffing, war driving, and evil twin attacks make **encryption (WPA3), strong authentication, and disabling insecure features (like WPS)** essential.
+
+---
+
+4.5 Wireless Configuration
+Antenna Types
+  omnidiriectional antenna: raidation power equally distributed in all horizontal directons
+  directional(e.g. Yagi) Antenna: radion power concentrated in one specific direction
+Wireless Security: encryption
+  WEP(wired equivalednt privacy)
+    RC-4(stream cipher--weak)
+    easily trackable
+    only option for 802.11b
+    static keys
+    low encryption mode 64 bits key
+    high encryption mode 128 bits key
+    intial vector
+  WPA(Wi-Fi protected access)
+    introduced TKIP(temporal key integrity protocol)--dynamic keys
+    still used RC-4
+    longer intial vecotor
+  WPA 2
+    AES(block cipher--more secure)
+    CCMP(conter mode cipher block chaining message authentication protocol)
+    not backwards compatible
+  WPA 3
+    Dragonfly algorithm to protect hacdshaking, Galois Counter Mode for integrity checking
+Authentication: decentralized
+IEEE 802.1x-Remote Authentication Dial in User Service(EAPoL-Externsive Autehntication Protocol over LAN)
+Bluetooth
+  Bluetooth is a personal area network protocol designed to free devices from physical wires
+  bluetooth modes
+  discovery modes
+  automatic pairing
+  bluejacking:sending spam to nearby bluetooth devices
+  blue snarfing:copies informaiton off of remote devices
+  blue bugging
+    more serious
+    allows ful use of phone
+    allows on to make calls
+    can eavesdrop on calls
