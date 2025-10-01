@@ -619,3 +619,448 @@ Clearly define:
 - **Reason for corrections/changes**: Assessments should tie findings to business/IT needs.  
 
 ---
+
+# 4.8 Security Assessments — Vulnerability Management
+
+> Summary: vulnerability management is the continuous cycle of **discovering, assessing, remediating, and verifying** software/hardware weaknesses across an environment. This section covers scanners, patching, information sources, SCAP, honeypots, log reviews, and related controls.
+
+---
+
+## Vulnerability Management Activities (high-level)
+- **Discover** technical vulnerabilities (vulnerability scanners, asset inventories, manual review).  
+- **Assess / Prioritize** by risk (exploitability, impact, exposure).  
+- **Remediate** (patch, configuration change, mitigation).  
+- **Verify** fixes (re-scan, regression tests).  
+- **Document & report** (tickets, SLAs, metrics).
+
+**Note:** Performing a risk assessment helps identify areas you might have missed and prioritizes remediation.
+
+---
+
+## Vulnerability Scanners — critical components & modes
+- **Credentials**
+  - **Unauthenticated (credential-less)** scans: scan from outside without logging in; find only externally-visible issues.  
+  - **Authenticated (credentialed)** scans: scanner logs in (e.g., via SSH, SMB, API) to inspect system internals; finds more issues (missing patches, insecure configs).
+- **Agent vs Agentless**
+  - **Agent-based**: small client runs on endpoints, reports to scanner — good for intermittent networks or deep local checks.  
+  - **Agentless**: remote scanning only; easier to deploy but may be limited.
+- **Intrusive vs Non-intrusive**
+  - **Non-intrusive**: identifies and reports vulnerabilities without attempting exploitation. Safer in production.  
+  - **Intrusive (active/exploit)**: attempts to validate/exploit vulnerabilities — provides stronger proof but carries risk of breaking services.
+
+**Scanner examples (study only):** Nessus, OpenVAS/Greenbone, Qualys, Tenable (commonly seen on Security+).
+
+---
+
+## Patch Management
+- **Purpose:** identify and install missing updates across OS, apps, firmware, network devices (firewalls, switches, UTM).  
+- **Key activities**
+  - Inventory & baseline systems.  
+  - Test patches in staging before production.  
+  - Schedule regular patch windows and emergency patching for critical CVEs.  
+  - Track installation and rollback procedures.  
+- **Devices beyond OS:** remember network equipment and appliances require firmware updates.
+
+---
+
+## Vulnerability Information Sources
+- **Advisories:** vendor or CVE-specific notices describing vulnerabilities and fixes.  
+- **Bulletins / Mailing lists:** high-level summaries or newsletters.  
+- **ISACs / ISAO:** industry-specific information sharing & analysis centers (non-profit groups for sector intel).  
+- **News & Security feeds:** headlines or blogs reporting new exploit activity.
+
+**Tip:** subscribe to vendor and CVE feeds for proactive awareness.
+
+---
+
+## SCAP — Security Content Automation Protocol (overview)
+- **What it is:** a suite of standards (open) to standardize naming, formatting, and reporting for security flaws and configuration issues. Used to automate assessment and reporting.
+- **Goals:** enumerate software flaws, compare to baselines, and enable machine-readable assessments.
+
+**SCAP language elements**
+- **OVAL (Open Vulnerability and Assessment Language):** describes how to collect/check system information (system info, machine state, tests).  
+- **ARF (Asset Reporting Format):** correlates/report findings about devices/assets.  
+- **XCCDF (Extensible Configuration Checklist Description Format):** XML-based checklists/benchmarks used to define policies and checks.
+
+**SCAP identification schemes**
+- **CPE (Common Platform Enumeration):** standardized product naming.  
+- **CVE (Common Vulnerabilities and Exposures):** unique vulnerability identifiers.  
+- **CCE (Common Configuration Enumeration):** standardized config issue identifiers.
+
+---
+
+## Honeypots / Honeynets
+- **Purpose:** attract attackers to monitor tactics, gather intelligence, and detect earlier.  
+- **Design guidance:** should act as **enticement**, not **entrapment** — i.e., capture attacker activity while avoiding legal/ethical pitfalls.  
+- **Examples:** low-interaction honeypots (emulated services) vs high-interaction honeypots (real systems for deeper intel).
+
+---
+
+## Log Reviews & Monitoring
+- **Log sources:** system logs, application logs, firewall logs, IDS/IPS, authentication logs, network devices.  
+- **Syslog:** common network-based logging protocol (text messages forwarded to a central log server).  
+- **SIEM (Security Information and Event Management):**
+  - Aggregates logs from many sources.
+  - Normalizes, correlates, and alerts on suspicious patterns.
+  - Enables searches, dashboards, and forensic timelines.
+- **Log review best practices**
+  - Centralize logs (retention & integrity).  
+  - Tune alerts to reduce false positives.  
+  - Keep retention aligned to compliance needs.  
+  - Use correlation rules to detect multi-source attacks.
+
+---
+
+## Unified Threat Management (UTM)
+- **UTM devices** combine multiple security functions (firewall, IDS/IPS, antivirus, content filtering) into a single appliance.  
+- **Use case:** simplified management for small/medium networks; can reduce complexity but be cautious of single points of failure.
+
+---
+
+# 4.9 Threat Intelligence — Security+
+
+> Summary: Threat intelligence turns raw data about threats into **actionable information** you can use to reduce risk. It helps teams prioritize, detect, and respond to attacks faster.
+
+---
+
+## Threat intelligence **types** (by audience & usage)
+| Type | Audience / Purpose | Example |
+|---|---|---|
+| **Strategic** | Non-technical, high-level — for executives and policy decisions | Industry-level trends, risk to the business from geopolitical events |
+| **Operational** | Mid-level: focuses on adversaries and their likely actions | Which threat groups target our sector and what assets they go after |
+| **Tactical** | Immediate, technical — used by analysts and defenders | Signatures, IOCs, rules to detect a specific exploit |
+| **Counterintelligence** | Offensive or defensive actions using intelligence to disrupt adversaries | Deception, takedown coordination with law enforcement |
+
+**Note:** Strategic → Operational → Tactical is the usual funnel from broad context to immediate detection/remediation steps.
+
+---
+
+## Intelligence **source types**
+- **OSINT (Open-Source INTelligence)** — public sources: blogs, paste sites, forums, social media, public malware repositories.  
+- **Closed / Proprietary sources** — commercial feeds, subscription-based reports.  
+- **Internal telemetry** — logs, EDR alerts, SIEM events, honeypot data.  
+- **Information sharing bodies** — ISACs, vendor advisories, CERTs.
+
+**Examples of orgs**
+- **CERT / CSIRT** — incident response and coordination teams.  
+- **ISAC / ISAOs** — sector-focused sharing groups (financial, healthcare, etc.).  
+- **MITRE** — ATT&CK framework, enterprise resources and mappings.
+
+---
+
+## Threat awareness (what to track)
+- **Known threats** — long-established malware/families that remain relevant.  
+- **Current vulnerabilities** — documented vulnerabilities in HW/SW/processes.  
+- **Trending attacks** — attacker tactics that are growing in popularity (e.g., supply-chain, living-off-the-land).  
+- **Emerging threat sources** — new tools, new exploit kits, evolving business & tech changes.  
+- **Zero-day vulnerabilities** — newly discovered flaws with no public patch — very high priority.
+
+---
+
+## Intelligence **gathering cycle** (how to turn data → intel)
+1. **Define intelligence requirements** — what questions must intelligence answer? (e.g., "Which 3rd-party services expose customer data?")  
+2. **Collect** — gather raw data from OSINT, sensors, vendor advisories, internal logs.  
+3. **Process / Analyze** — enrich and contextualize; turn noise into meaningful indicators and TTPs.  
+4. **Disseminate** — deliver actionable intelligence to the right teams (SOC, IR, execs) with recommended actions.  
+5. **Feedback** — teams report back results to refine requirements and improve future cycles.
+
+---
+
+## Threat Hunting
+- **Definition:** proactive, hypothesis-driven searches across telemetry to discover threats before alerts fire.  
+- **Method:** use known TTPs (tactics, techniques, procedures) to form hypotheses, then search logs/EDR/SIEM for patterns.  
+- **Inputs:** threat intelligence feeds, advisories, vendor notes, MITRE ATT&CK mappings.
+
+---
+
+## Advisories, Bulletins, & TTPs
+- **Advisories / Bulletins:** vendor or researcher-published details about vulnerabilities or attacks.  
+- **TTPs (Tactics, Techniques, Procedures):** patterns of attacker behavior (useful to map in MITRE ATT&CK).  
+- **Use-case:** map detected indicators to TTPs to understand attacker intent and next likely steps.
+
+---
+
+## Indicators & Definitions (quick)
+- **IoC (Indicator of Compromise):** forensic artifact showing a system was compromised (e.g., malicious hash, C2 IP).  
+- **IoA (Indicator of Attack) / Behavioral indicator:** activity/behavior suggesting an ongoing attack (e.g., unusual PowerShell execution).  
+- **Reputational indicators:** reputation data associated with an IP/domain (malicious, suspicious).  
+- **TTPs:** higher-level behaviors describing how an adversary operates (not single artifacts).
+
+---
+
+## How to make intelligence actionable
+- **Enrichment:** add context (asset owner, criticality, patch status) to raw indicators.  
+- **Prioritization:** combine exploitability + CVSS + asset criticality + threat actor interest.  
+- **Operationalization:** translate intel into detection rules, SIEM alerts, EDR playbooks, and SOC runbooks.  
+- **Automation:** feed vetted indicators to blocking lists (firewall, proxy) and detection rules (SIEM/EDR).
+
+---
+
+# 4.10 Modify Enterprise Capabilities to Enhance Security
+
+## Using Security Infrastructure in Responses
+- **Firewall rules**  
+  Define which traffic is allowed or denied on a network.
+
+- **Access control list (ACL) rules**  
+  Rules that specify which users or systems can access certain resources.
+
+- **IPS/IDS rules**  
+  - IDS (Intrusion Detection System): Detects malicious traffic/activity.  
+  - IPS (Intrusion Prevention System): Detects and actively blocks malicious traffic.
+
+- **Endpoint detection and response (EDR)**  
+  Security solutions that monitor and respond to threats on endpoints (PCs, servers, mobile devices).
+
+- **Extended detection and response (XDR)**  
+  Integrates EDR with network, cloud, and email data to improve threat visibility and automated responses.
+
+- **Data loss prevention (DLP) rules**  
+  Policies to prevent sensitive data from leaving the organization (e.g., blocking SSNs in outgoing email).
+
+- **Network access control (NAC)**  
+  Enforces security policies on devices before they connect to the network (e.g., patch status, antivirus installed).
+
+- **Scripts / regular expressions**  
+  Custom automation or pattern-matching rules to detect/stop suspicious activity.
+
+- **DNS filtering**  
+  Blocks access to malicious or unauthorized websites by filtering DNS requests.
+
+---
+
+## Securing Mail
+
+- **DomainKeys Identified Mail (DKIM)**  
+  Uses **PKI (Public Key Infrastructure)** to verify the origin of email messages. Helps ensure emails haven’t been tampered with.
+
+- **Domain-based Message Authentication, Reporting, and Conformance (DMARC)**  
+  A policy that tells receiving mail servers what to do after checking SPF and DKIM records (e.g., accept, reject, or quarantine suspicious emails).
+
+- **Sender Policy Framework (SPF)**  
+  A DNS record listing the servers authorized to send emails for a domain. Prevents email spoofing.
+
+---
+
+## Securing the Operating System
+
+### Windows
+- **Active Directory (AD)**  
+  Microsoft’s directory service for identity management, authentication, and access control.
+
+### Linux
+- **Secure Linux**  
+  General hardening steps such as disabling root SSH login, keeping packages updated, using SELinux/AppArmor, and enforcing least privilege.
+
+---
+
+# 4.11 Protocols and Ports
+
+## File Transfer Protocol (FTP)
+- Standard protocol for transferring computer files.
+- Client–server architecture.
+- **Not secure** (plaintext).
+- Operates on **TCP ports 20 (data), 21 (control)**.
+- Secure alternatives:
+  - **FTPS** (FTP over SSL/TLS).
+  - **SFTP** (SSH File Transfer Protocol, uses port 22).
+
+---
+
+## Secure Shell (SSH)
+- Provides secure communication over untrusted networks.
+- Supports remote login & command execution.
+- Client–server architecture.
+- Versions: **SSH-1 (obsolete)**, **SSH-2 (secure)**.
+- Operates on **TCP port 22**.
+- Related: **SCP, SFTP** also use port 22.
+
+---
+
+## Telnet
+- Early remote login protocol.
+- **Not secure** (plaintext).
+- Superseded by SSH.
+- Operates on **TCP port 23**.
+
+---
+
+## Simple Mail Transfer Protocol (SMTP)
+- Used for sending and relaying email.
+- **Not secure by default** (plaintext).
+- Operates on:
+  - **TCP port 25** (legacy, unencrypted).
+  - **TCP port 465** (SMTP over SSL).
+  - **TCP port 587** (SMTP with STARTTLS, secure standard).
+
+---
+
+## Terminal Access Controller Access Control System Plus (TACACS+)
+- Cisco AAA protocol.
+- Encrypts the **entire packet** (more secure than RADIUS).
+- Separates Authentication, Authorization, and Accounting.
+- Uses **TCP port 49**.
+
+---
+
+## Domain Name System (DNS)
+- Translates domain names → IP addresses.
+- Hierarchical, decentralized.
+- Operates on **UDP/TCP port 53**.
+- Security risks: **DNS poisoning, spoofing**.
+- Defense: **DNSSEC, DNS filtering**.
+
+---
+
+## Dynamic Host Configuration Protocol (DHCP)
+- Automatically assigns IP addresses & configuration.
+- Operates on:
+  - **UDP port 67 (server)**.
+  - **UDP port 68 (client)**.
+
+---
+
+## Trivial File Transfer Protocol (TFTP)
+- Very simple version of FTP.
+- **Not secure** (no authentication/encryption).
+- Used for LAN booting or firmware updates.
+- Operates on **UDP port 69**.
+
+---
+
+## Hypertext Transfer Protocol (HTTP / HTTPS)
+- **HTTP**:
+  - Foundation of web traffic.
+  - Operates on **TCP port 80**.
+  - **Not secure** (plaintext).
+- **HTTPS**:
+  - Secure HTTP with TLS/SSL.
+  - Operates on **TCP port 443**.
+  - Provides encryption + integrity.
+
+---
+
+## Post Office Protocol (POP3)
+- Retrieves email from a mail server to a client.
+- Operates on:
+  - **TCP port 110** (plaintext).
+  - **TCP port 995** (POP3S, secure).
+
+---
+
+## Internet Message Access Protocol (IMAP)
+- Retrieves and synchronizes email across devices.
+- Operates on:
+  - **TCP port 143** (plaintext).
+  - **TCP port 993** (IMAPS, secure).
+
+---
+
+## Network Time Protocol (NTP)
+- Synchronizes clocks between devices.
+- Operates on **UDP port 123**.
+
+---
+
+## Simple Network Management Protocol (SNMP)
+- Used to monitor and manage network devices.
+- Versions:
+  - v1/v2: insecure (plaintext).
+  - v3: secure (auth + encryption).
+- Ports:
+  - **UDP port 161** = Queries  
+  - **UDP port 162** = Traps  
+
+### Queries vs Traps
+- **Queries (161)**: Manager → Agent.  
+  - Manager pulls information (GET, GET-NEXT, SET).  
+  - Example: “What’s the CPU usage?”  
+- **Traps (162)**: Agent → Manager.  
+  - Device pushes an alert without being asked.  
+  - Example: “Interface went down!”  
+
+---
+
+## Lightweight Directory Access Protocol (LDAP)
+- Provides directory services (user, group, resource info).
+- Operates on:
+  - **TCP/UDP port 389** (plaintext).
+  - **TCP/UDP port 636** (LDAPS, secure with TLS/SSL).
+
+---
+
+## Remote Authentication Dial-In User Service (RADIUS)
+- AAA protocol (Authentication, Authorization, Accounting).
+- Encrypts only the password (less secure than TACACS+).
+- Uses:
+  - **UDP port 1812** (authentication).
+  - **UDP port 1813** (accounting).
+
+---
+
+## Remote Desktop Protocol (RDP)
+- Graphical remote access.
+- Operates on **TCP port 3389**.
+
+---
+
+## Kerberos
+- Authentication protocol using **tickets** (time-sensitive).
+- Used in Active Directory.
+- Provides mutual authentication.
+
+---
+
+## Diameter
+- Successor to RADIUS.
+- More robust AAA features.
+- Operates on **TCP or SCTP port 3868**.
+
+---
+
+## Secure Real-Time Transport Protocol (SRTP)
+- Provides encryption + authentication for **real-time voice/video**.
+- Used in VoIP, streaming, video conferencing.
+- Protects against eavesdropping and replay attacks.
+
+---
+
+# 🔐 AAA (Authentication, Authorization, Accounting)
+
+- **Authentication** – Verifies identity (passwords, biometrics, MFA).  
+- **Authorization** – Grants permissions (what user can do).  
+- **Accounting** – Tracks user activity (logs, audits, billing).  
+
+### Common AAA Protocols:
+- **RADIUS** → UDP, encrypts only password.  
+- **TACACS+** → TCP, encrypts entire packet.  
+
+---
+
+# 📑 Protocols & Ports Cheat Sheet
+
+| Protocol | Port | Secure Version |
+|----------|------|----------------|
+| FTP | 20/21 (TCP) | FTPS (SSL/TLS), SFTP (SSH, 22) |
+| SSH | 22 (TCP) | — |
+| Telnet | 23 (TCP) | Replaced by SSH |
+| SMTP | 25 (TCP) | 465 (SSL), 587 (STARTTLS) |
+| DNS | 53 (UDP/TCP) | DNSSEC |
+| DHCP | 67/68 (UDP) | — |
+| TFTP | 69 (UDP) | — |
+| HTTP | 80 (TCP) | HTTPS (443) |
+| POP3 | 110 (TCP) | POP3S (995) |
+| NTP | 123 (UDP) | — |
+| IMAP | 143 (TCP) | IMAPS (993) |
+| SNMP | 161 (UDP queries), 162 (UDP traps) | SNMPv3 (secure) |
+| LDAP | 389 (TCP/UDP) | LDAPS (636) |
+| TACACS+ | 49 (TCP) | — |
+| RADIUS | 1812 (auth), 1813 (acct) (UDP) | — |
+| RDP | 3389 (TCP) | — |
+| Kerberos | 88 (TCP/UDP) | — |
+| Diameter | 3868 (TCP/SCTP) | — |
+| SRTP | Dynamic | — |
+
+---
+
+
