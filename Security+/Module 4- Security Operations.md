@@ -1063,4 +1063,219 @@ Clearly define:
 
 ---
 
+# 4.12 Authentication
 
+## What is Authentication?
+Authentication is the process of **proving a claimed identity**.
+
+There are three main types:
+- **Type 1: Something you know** (e.g., passwords, PINs)
+- **Type 2: Something you have** (e.g., smart card, token)
+- **Type 3: Something you are** (e.g., biometrics)
+
+👉 The strongest authentication is **multifactor authentication**, which combines two or more of these types.  
+👉 **Mutual authentication** is also desirable — where both the user and the system verify each other’s identity.
+
+---
+
+## Type 1: Something You Know
+Examples: passwords, passphrases, cognitive passwords (questions/answers).
+
+### Best Practices
+- **Length**: at least 8 characters (modern best practice is even longer, e.g., 12–16+).
+- **Change regularly**: rotate passwords periodically.
+- **Complexity**: use upper- and lowercase letters, numbers, and special characters.
+- **Password history**: enforce reuse restrictions so users don’t recycle old passwords.
+- **Brute force/dictionary attack protection**: longer and more complex passwords reduce the risk.
+- **Cognitive passwords**: "secret questions," but these can be weak if answers are easy to guess.
+- **Graphical password/image-based authentication**: click on specific areas in an image.
+- **Clipping levels**: systems can detect too many failed attempts (e.g., account lockout).
+
+---
+
+## Type 2: Something You Have
+Examples: **physical or digital objects** that provide authentication.
+
+- **Token devices**: small hardware devices that generate one-time passwords (OTPs).
+- **Smart card**: credit card–like card with embedded chip.
+- **Memory card**: stores authentication data.
+- **Hardware key**: USB/NFC keys (e.g., YubiKey).
+- **Cryptographic key**: private key for authentication in asymmetric encryption.
+- **Digital certificate**: used in PKI, signed by a trusted 3rd party (e.g., SSL/TLS certs).
+- **Cookies**: sometimes act as an authentication token stored in the browser. after logging in, a cookie stored in your browser can act as proof you’re authenticated, so you don’t have to log in again.
+
+---
+
+## Type 3: Something You Are
+Biometric authentication.
+
+### Physiological (Static)
+Characteristics that **do not change significantly over time**:
+- Fingerprint
+- Hand geometry
+- Iris scan
+- Retina scan
+
+### Behavioral (Dynamic)
+Characteristics based on **unique behaviors**, sometimes considered an additional type of authentication:
+- Walk (gait recognition)
+- Talk (voice recognition)
+- Swipe (touchscreen gesture patterns)
+
+---
+
+## Key Points
+- **Single-factor authentication**: using only one type (e.g., just a password).
+- **Multifactor authentication (MFA)**: combining two or more (e.g., password + fingerprint).
+- **Mutual authentication**: both sides (client and server) prove their identity.
+
+---
+
+# 4.13 Crossover Error Rate (CER)
+
+## Errors in Biometric Authentication
+- **Type 1 Error: False Rejection (False Negative)**
+  - A legitimate user is incorrectly denied access.
+  - Happens when the system is too strict (requires too much information).
+  - Causes inconvenience and overhead for valid users.
+
+- **Type 2 Error: False Acceptance (False Positive)**
+  - An imposter is incorrectly granted access.
+  - Happens when the system is too lenient (does not check enough information).
+  - Represents a **serious security risk**.
+
+---
+
+## Relationship Between Errors
+- When the **false rejection rate** goes down (system is less strict), the **false acceptance rate** usually goes up, and vice versa.
+- There is a **trade-off** between convenience and security.
+
+---
+
+## Crossover Error Rate (CER)
+- The point at which the **false rejection rate** (FRR) and **false acceptance rate** (FAR) are equal.
+- **Lower CER = more accurate biometric system**.
+- In security exams, if a question asks *“What metric determines biometric accuracy?”* → The answer is **CER**.
+
+---
+
+## Accuracy of Biometric Methods
+- **Iris scans** are considered among the **most accurate** biometric methods.
+- They typically achieve a **very low CER** compared to fingerprints, hand geometry, or voice recognition.
+
+---
+
+# 4.14 Single Sign-On (SSO)
+
+## What is SSO?
+- **Single Sign-On** allows a user to provide credentials **once** to an authentication server and then gain access to multiple interconnected and disparate systems.  
+- Users don’t need to log in separately to each application.
+
+---
+
+## Pros
+- **Ease of use for end users** (fewer logins to remember).
+- **Centralized control** (admins manage authentication in one place).
+- **Ease of administration** (streamlines account management).
+
+## Cons
+- **Single point of failure**: if the authentication server goes down, all systems become inaccessible.
+- **Standards necessary**: requires compatible protocols across systems (e.g., Kerberos, SAML, OpenID Connect).
+- **Keys to the kingdom**: if an attacker compromises the SSO credentials, they gain access to *all* connected systems.
+
+---
+
+# Kerberos
+
+## Overview
+- A **network authentication protocol** developed at MIT’s Project Athena.
+- Provides secure authentication in insecure environments.
+- Widely used in **Windows 2000+** and some **UNIX/Linux** systems.
+- Supports **Single Sign-On**.
+
+## Key Features
+- **Never transfers actual passwords** over the network.
+- Uses **symmetric encryption** for identity verification.
+- Protects against **replay attacks** (by using time-stamped tickets).
+- Relies on a **Ticket-Granting Ticket (TGT)** system:
+  1. User logs in once and receives a TGT.
+  2. TGT can request service tickets for multiple systems without re-entering credentials.
+
+---
+
+## Related Standards
+- **SAML (Security Assertion Markup Language)**  
+  XML-based standard for exchanging authentication and authorization data between parties (commonly used for web-based SSO).
+
+- **OpenID Connect**  
+  Identity layer built on top of OAuth 2.0. Widely used in modern web/mobile apps (e.g., “Sign in with Google”).
+
+---
+
+## Key Takeaway
+- **SSO** improves usability but increases risk if credentials are compromised.  
+- **Kerberos** is a classic SSO implementation (Windows/UNIX).  
+- **SAML and OpenID Connect** are modern web SSO solutions.
+
+---
+
+# 4.15 Authorization and Access Control Models
+
+## Access Control Models
+
+### Discretionary Access Control (DAC)
+- The **security of an object is at the owner’s discretion**.
+- Access is granted through an **Access Control List (ACL)**.
+- Commonly implemented in **commercial products** and client-based systems.
+- Example: Windows file permissions.
+- Identity-based: the owner decides who gets access.
+
+---
+
+### Mandatory Access Control (MAC)
+- Used where **classification and confidentiality are critical** (e.g., military, government).
+- Requires a system designed for MAC (e.g., **SELinux**, Trusted Solaris with extensions).
+- All objects have a **security label**.
+- **Labels** define classification levels (e.g., Top Secret, Secret, Confidential).
+- Categories can also support **“need to know”**.
+- Labels and categories are **defined by the organization**.
+- Much stricter than DAC — users cannot override.
+
+---
+
+### Role-Based Access Control (RBAC)
+- Permissions are assigned based on a **role** (e.g., “HR Manager,” “Database Admin”).
+- **Mitigates privilege creep** (users only have access tied to their job role).
+- Strong constraint on user access.
+- Well-suited for environments with **high turnover rates** (easy to assign/revoke roles).
+- **High turnover** means that employees frequently join or leave an organization, or change positions.
+- Example: A new employee is added to the “Accounting” role and automatically gets the right permissions.
+
+---
+
+### Attribute-Based Access Control (ABAC)
+- Access granted based on **attributes** (of the subject, object, or environment).
+- Attributes can include:
+  - **Location** (e.g., only accessible from corporate network)
+  - **Role** (e.g., manager vs. staff)
+  - **Tenure** (e.g., employees with >1 year of service)
+- Very **flexible** model: combines multiple attributes for decisions.
+- Often used in **cloud and identity systems**.
+
+---
+
+### Rule-Based Access Control (RuBAC)
+- Access decisions made based on **rules** (if–then logic).
+- Common in **firewalls and intrusion prevention systems**.
+- Example:  
+  - Rule: If traffic is from `192.168.1.0/24` and destination is port 22 → **allow**.  
+  - Otherwise → **deny**.
+
+---
+
+## Key Takeaways
+- **DAC**: Owner decides → flexible but weaker security.  
+- **MAC**: Organization enforces → strong, often in military/government.  
+- **RBAC**: Permissions by role → efficient for enterprises.  
+- **ABAC**: Permissions by attributes → flexible, context-aware.  
+- **RuBAC**: Permissions by rules → common in firewalls.
