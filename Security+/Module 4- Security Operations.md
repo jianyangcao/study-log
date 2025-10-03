@@ -1279,3 +1279,282 @@ Characteristics based on **unique behaviors**, sometimes considered an additiona
 - **RBAC**: Permissions by role → efficient for enterprises.  
 - **ABAC**: Permissions by attributes → flexible, context-aware.  
 - **RuBAC**: Permissions by rules → common in firewalls.
+
+---
+
+# 4.16 Incident Response
+
+## Incident Response Process
+
+Incident response typically follows **six phases**: Preparation, Detection & Analysis, Containment, Eradication, Recovery, and Post-Incident Activity.  
+
+---
+
+### 1. Preparation
+- **System hardening**: Disable unnecessary services, patch vulnerabilities, and apply secure configurations.  
+- **Identify critical systems** and document their current state.  
+- **Harden key systems** by:
+  - Removing unnecessary services.  
+  - Making configuration changes.  
+- **Create policies and procedures**:
+  - Include an **incident response plan**.  
+  - Define roles, responsibilities, and communication channels.  
+- **Backups**: Ensure you have reliable and tested backup systems.  
+
+📌 *Explanation*: Preparation is about **reducing risk before incidents happen**. Having a strong plan and hardened systems reduces the chance and impact of attacks.
+
+---
+
+### 2. Detection and Analysis
+- **Decide if an incident has occurred** and how serious it is.  
+- **First step**: Confirm whether it is truly an incident.  
+- **If confirmed**:
+  - Classify the incident (e.g., malware, insider threat, DDoS).  
+  - Notify appropriate **stakeholders** depending on severity.  
+
+📌 *Explanation*: This stage is about **recognizing incidents quickly**. Not all alerts are incidents (some may be false positives). Correct classification determines the response level.
+
+---
+
+### 3. Containment
+- **Limit the scope of the breach** (stop the spread).  
+- **Goal**: Prevent further damage and lateral movement.  
+- Methods:
+  - Apply **firewall rules**.  
+  - Use **router ACLs (Access Control Lists)** to block malicious traffic.  
+
+📌 *Explanation*: Containment is critical. You don’t fix the root cause here; you **stop it from spreading** so you can analyze safely.
+
+---
+
+### 4. Eradication
+- **Remove the cause** of the breach.  
+- Actions:
+  - Isolate impacted systems.  
+  - Remove malware, disable compromised accounts, patch vulnerabilities.  
+- This process may need to be repeated multiple times until systems are **fully clean**.  
+
+📌 *Explanation*: Unlike containment (which only limits damage), **eradication removes the threat entirely**.
+
+---
+
+### 5. Recovery
+- **Restore systems** back to normal operation.  
+- Ensure the environment is:
+  - **Clean** (no lingering malware).  
+  - **Functional** (all business processes restored).  
+- Systems are put back into **production** after validation.  
+
+📌 *Explanation*: At this stage, systems go live again, but careful monitoring is required to confirm stability.
+
+---
+
+### 6. Post-Incident Activity
+- **After-action review**:
+  - Gather all stakeholders.  
+  - Discuss what happened.  
+  - Identify what can be improved.  
+- Questions to ask:
+  - How can we improve for next time?  
+  - What policy or procedure changes are needed?  
+  - What new technologies should we invest in?  
+- **Lessons learned** become part of the updated incident response process.  
+
+📌 *Explanation*: This stage ensures the **organization learns from incidents**. The knowledge feeds back into the preparation phase for continuous improvement.
+
+---
+
+# 4.17 Mitigation Techniques
+
+Mitigation techniques are methods used to **reduce or eliminate the impact of a security incident**.  
+
+---
+
+## Reconfigure Endpoint Security
+- **Re-image to baseline**: Restore the system to a known good state (clean image).  
+- **Harden system**: Disable unnecessary services, apply security patches, enforce strong configurations.  
+- **Application allow/deny lists**: 
+  - Allow list → only approved applications can run.  
+  - Deny list → block specific applications.  
+- **Quarantine if necessary**: Isolate a compromised device to stop the spread of malware.  
+
+---
+
+## Configuration Changes
+- **Firewall rules**: Block or allow specific traffic to limit threats.  
+- **MDM (Mobile Device Management)**: Centralized control of mobile devices (enforce policies, push updates, wipe data if lost).  
+- **DLP (Data Loss Prevention)**: Prevent unauthorized transfer of sensitive data (e.g., blocking sending credit card numbers via email).  
+- **Content filter / URL filter**: Restrict access to harmful or inappropriate websites.  
+- **Update or revoke certificates**: Replace expired or compromised digital certificates to maintain trust.  
+
+---
+
+## Network-Based Mitigation
+- **Isolation**: Completely separate compromised systems.  
+- **Containment**: Limit the damage by segmenting infected parts of the network.  
+- **Segmentation**: Divide the network into zones (e.g., internal, DMZ, guest) to minimize attack spread.  
+
+---
+
+## SOAR (Security Orchestration, Automation, and Response)
+Automates incident response actions using predefined procedures.  
+
+- **Runbooks**: Predefined **step-by-step procedures** to achieve a specific outcome.  
+  - Example: A runbook for wiping a compromised endpoint.  
+- **Playbooks**: Predefined steps to **identify, analyze, and respond** to an issue.  
+  - Example: A phishing playbook detailing how to analyze an email and notify users.  
+
+📌 *Explanation*:  
+- **Runbook** = very specific task (like “reset a password”).  
+- **Playbook** = broader response workflow (like “respond to phishing attacks”).  
+
+---
+
+# 4.18 Attack Framework
+
+Attack frameworks provide models to **understand attacker behavior** and design effective defenses.
+
+---
+
+## MITRE ATT&CK
+- **ATT&CK** = *Adversarial Tactics, Techniques, and Common Knowledge*.  
+- Provides a **database of known TTPs** (*Tactics, Techniques, and Procedures*) used by attackers.  
+- Useful for:
+  - Threat intelligence sharing.  
+  - Red team / blue team exercises.  
+  - Mapping security controls to attacker behavior.  
+
+📌 *Explanation*: MITRE ATT&CK is like a **playbook of how real attackers operate**, which defenders can study to prepare better defenses.
+
+---
+
+## Diamond Model of Intrusion Analysis
+- Focuses on **four core features** of an intrusion:
+  1. **Adversary** – who is attacking.  
+  2. **Infrastructure** – tools, servers, or delivery channels they use.  
+  3. **Capability** – malware or exploit being used.  
+  4. **Victim** – target being attacked.  
+
+📌 *Explanation*: The diamond model emphasizes the **relationships** between attacker, tools, and victim. Analysts use it to understand patterns in attacks.
+
+---
+
+## Cyber Kill Chain
+Developed by Lockheed Martin, describes the **phases of a cyberattack**:
+
+1. **Reconnaissance**  
+   - Attacker selects a target, researches it, and identifies vulnerabilities in the network.  
+   - Example: Scanning IP ranges, searching LinkedIn for employee details.  
+
+2. **Weaponization**  
+   - Attacker adapts or creates a malware payload to exploit identified vulnerabilities.  
+   - Example: Crafting a malicious Word doc with a macro exploit.  
+
+3. **Delivery**  
+   - Malware is transmitted to the target.  
+   - Example: Phishing email with attachment, malicious USB, or drive-by website.  
+
+4. **Exploitation**  
+   - The payload triggers and exploits vulnerabilities on the host.  
+   - Example: Running the macro in the Word doc installs malware.  
+
+5. **Installation**  
+   - Malware establishes persistence by installing a backdoor or other access point.  
+   - Example: Rootkits, registry modifications.  
+
+6. **Command and Control (C2)**  
+   - Attacker gains remote control of the compromised system.  
+   - Example: Malware connects back to attacker’s server for instructions.  
+
+7. **Actions on Objectives**  
+   - Attacker achieves their goals:  
+     - Data exfiltration  
+     - Data destruction  
+     - Encryption for ransom  
+
+📌 *Explanation*: The kill chain shows the **progression of an attack**. Defenders aim to detect and disrupt attacks **early in the chain** (e.g., during reconnaissance or delivery).  
+
+---
+
+# 4.19 Digital Forensics
+
+## What is Digital Forensics?
+- **Definition**: The discipline of using proven methods toward the **collection, preservation, validation, identification, analysis, interpretation, documentation, and presentation of digital evidence**.  
+- Goal: Ensure evidence can be used in legal or organizational investigations.  
+
+---
+
+## Forensics Principles (IOCE & SWGDE Guidelines)
+Two key organizations provide forensic principles:  
+- **IOCE**: International Organization on Computer Evidence  
+- **SWGDE**: Scientific Working Group on Digital Evidence  
+
+### Core Principles:
+- All forensic principles must be applied to **digital evidence**.  
+- Evidence **must not be altered** as a result of collection.  
+- Only trained personnel may access original digital evidence.  
+- All activities (seizure, storage, transfer, access) must be **fully documented** and reviewable.  
+- Individuals are responsible for any actions affecting evidence while in their possession.  
+- Any entity handling evidence must comply with these principles.  
+
+📌 *Explanation*: The emphasis is on **chain of custody** — documenting who handled evidence, when, and how, so it’s legally admissible.
+
+---
+
+## Forensics Process
+
+### 1. Identification
+- Secure the scene and prevent contamination.  
+- Identify the **scope of evidence** to be collected.  
+
+### 2. Collection
+- Collect evidence using tools and methods that survive **legal scrutiny**.  
+
+### 3. Analysis
+- Create a **forensic copy** (never work on originals).  
+- Use **repeatable, reliable methods and tools**.  
+- Goal: Extract relevant information (logs, metadata, deleted files, etc.).  
+
+### 4. Reporting / Presentation
+- Create a **detailed report** of tools, methods, and findings.  
+- Present conclusions in a way that can be used in court or internal investigations.  
+
+### 5. Evidence Preservation
+- Label, bag, and seal evidence in **tamper-resistant bags**.  
+- Use **anti-static bags** for electronic devices (to prevent electrostatic discharge damage).  
+- Store evidence in **secure, access-controlled facilities**.  
+
+📌 *Explanation*: Preservation ensures evidence remains **authentic and untampered**, which is critical for legal proceedings.
+
+---
+
+# 4.20 Chain of Custody and Order of Volatility
+
+---
+
+## Chain of Custody
+- **Definition**: The record of handling evidence from collection through presentation in court.  
+- Purpose: To ensure **integrity and admissibility** of evidence.  
+
+### Key Points:
+- Every detail of evidence handling must be **recorded**.  
+- Track **who interacted** with the evidence, **when, and why**.  
+- Detailed **reports and labeling** for all evidence collected.  
+- Strong **physical security controls** must be in place where evidence is stored.  
+
+📌 *Explanation*: Chain of custody ensures there is **no doubt in court** that evidence is authentic and hasn’t been tampered with.
+
+---
+
+## Order of Volatility
+- **Definition**: The order in which evidence should be collected, based on how quickly it may be lost.  
+
+### Standard Order:
+1. **CPU Registers** – Volatile, lost instantly when power is off.  
+2. **Cache** – Temporary storage, very short-lived.  
+3. **RAM (Random Access Memory)** – Lost on shutdown.  
+4. **Virtual Memory (Swap files)** – Partially persistent, but overwritten often.  
+5. **Hard Drive Data** – Non-volatile, remains until deleted/overwritten.  
+6. **Paper Documents** – Most persistent, will last unless physically destroyed.  
+
+📌 *Explanation*: Start with the **most volatile (short-lived)** evidence first, moving toward the most persistent.  
