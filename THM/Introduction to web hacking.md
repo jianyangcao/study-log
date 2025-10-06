@@ -22,3 +22,5 @@ This shows subdomains of domain.com while excluding the www version.
 ## 3.3 DNS Bruteforce ##
 ## 3.4 OSINT - Sublist3r ##
 ## 3.5 Virtual Hosts ##
+## 3.6 IDOR ##
+## 3.7 File Inclusion ##
