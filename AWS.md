@@ -154,7 +154,7 @@ sudo nano index.html
 
 ---
 
-☁️ Step 6: Enable AWS CloudTrail
+## ☁️ Step 6: Enable AWS CloudTrail
 1. Go to the AWS Console → search for CloudTrail
 2. Click Create trail
 3. Set the options:
@@ -165,7 +165,7 @@ sudo nano index.html
 
 ---
 
-🧠 Step 7: Verify CloudTrail Logging
+## 🧠 Step 7: Verify CloudTrail Logging
 You can check CloudTrail logs:
 - Go to the **Event history** tab
 - You’ll see entries for actions like:
